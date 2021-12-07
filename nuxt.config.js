@@ -24,7 +24,22 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/main.css'
   ],
+  styleResources: {
+    scss: [
+      '@/assets/tokens/border-radius.scss',
+      '@/assets/tokens/color.scss',
+      '@/assets/tokens/font-size.scss',
+      '@/assets/tokens/opacity.scss',
+      '@/assets/tokens/spacing.scss',
+      '@/assets/tokens/timing.scss',
+      '@/assets/tokens/z-index.scss',
+      '@/assets/tokens/box-shadow.scss',
+      '@/assets/mixins/_mixins.scss',
+      '@/assets/main.scss'
+    ]
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -41,6 +56,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

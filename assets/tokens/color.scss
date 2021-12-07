@@ -1,0 +1,55 @@
+$primary-color-50:  #f2f7ff;
+$primary-color-100: #e6f0ff;
+$primary-color-200: #c0d8ff;
+$primary-color-300: #99c1ff;
+$primary-color-400: #4d93fe;
+$primary-color:     #0373bd;
+$primary-color-600: #015ae5;
+$primary-color-700: #014bbf;
+$primary-color-800: #013c98;
+$primary-color-900: #00317c;
+
+$error-color:   #d6262e;
+$succes-color:  #63a830;
+$warning-color: #EC8A3F;
+
+$bg-color:        #F0F2F4;
+$bg-color-darker: #E1E5E9;
+
+$color-grey:        #EAEAEA;
+$color-grey-light:  #F6F6F6;
+$color-grey-btn:  #f1f1f1;
+$color-highlight-grey: #E7E9EB;
+$border-color: #CFCFCF;
+
+$color-active-font: #6F7886;
+$color-standard-font: #999FA9;
+
+
+$font-color: #081E2B;
+$font-color-light: #b1b5ba;
+
+:export {
+  primaryColor50: $primary-color-50;
+  primaryColor100: $primary-color-100;
+  primaryColor200: $primary-color-200;
+  primaryColor300: $primary-color-300;
+  primaryColor400: $primary-color-400;
+  primaryColor: $primary-color;
+  primaryColor600: $primary-color-600;
+  primaryColor700: $primary-color-700;
+  primaryColor800: $primary-color-800;
+  primaryColor900: $primary-color-900;
+
+  errorColor: $error-color;
+  succesColor: $succes-color;
+  warningColor: $warning-color;
+
+  colorGrey: $color-grey;
+  borderColor: $border-color;
+
+  colorActiveFont: $color-active-font;
+  colorStandardFont: $color-standard-font;
+
+
+}
