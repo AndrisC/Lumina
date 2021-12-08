@@ -25,7 +25,7 @@ export default {
       menuOpen: false,
       menus: [
         {name: 'Collection', location:"/", _id:"0"},
-        {name: 'Generate', location:"/", _id:"1"},
+        {name: 'Generate', location:"/SolarSystemGenerator", _id:"1"},
       ]
     }
   },
