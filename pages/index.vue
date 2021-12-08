@@ -3,9 +3,6 @@
     <div v-for="(type, index) in planetTypes" class="" :key="index">
       <lua-planet-generator :seed="index" :planetType="type.name"/>
     </div>
-    <!-- <lua-planet-generator />
-    <lua-planet-generator />
-    <lua-planet-generator /> -->
   </div>
 </template>
 
