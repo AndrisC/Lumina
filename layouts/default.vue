@@ -1,8 +1,10 @@
 <template>
   <div>
 
+
     <div class="default-layout">
       <div class="content" id="content">
+        <lua-navbar></lua-navbar>
         <Nuxt />
         <div id='stars'></div>
         <div id='stars2'></div>
@@ -50,9 +52,9 @@ html
 @use compass
 // n is number of stars required
 @function multiple-box-shadow ($n)
-  $value: '#{random(2000)}px #{random(2000)}px #a8a8a8'
+  $value: '#{random(4000)}px #{random(4000)}px #a8a8a8'
   @for $i from 2 through $n
-    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #8f8f8f'
+    $value: '#{$value} , #{random(4000)}px #{random(4000)}px #8f8f8f'
 
   @return unquote($value)
 
@@ -70,7 +72,7 @@ $shadows-big:    multiple-box-shadow(100)
   &:after
     content: " "
     position: absolute
-    top: 2000px
+    top: 4000px
     width: 1px
     height: 1px
     background: transparent
@@ -86,7 +88,7 @@ $shadows-big:    multiple-box-shadow(100)
   &:after
     content: " "
     position: absolute
-    top: 2000px
+    top: 4000px
     width: 2px
     height: 2px
     background: transparent
@@ -112,7 +114,7 @@ $shadows-big:    multiple-box-shadow(100)
   from
     transform: translateY(0px)
   to
-    transform: translateY(-2000px)
+    transform: translateY(-4000px)
 
 
 #stars
