@@ -1,0 +1,61 @@
+{
+  "_from": "noise-map",
+  "_id": "noise-map@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-eF6DGJuJF2Hj56u7Tjkeh6z/JtQQ76tBPjt8/N2uoL0gJzUMfEWavzW9v4lJTlAxNOnYsTGCkT7CoXNe/TcWHQ==",
+  "_location": "/noise-map",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "noise-map",
+    "name": "noise-map",
+    "escapedName": "noise-map",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/noise-map/-/noise-map-1.1.0.tgz",
+  "_shasum": "164c0e140dd5ecb7a058f0f5d27dc5bf56b93aa1",
+  "_spec": "noise-map",
+  "_where": "C:\\Users\\lajha\\Programming\\Lumina",
+  "author": {
+    "name": "Ogus"
+  },
+  "bugs": {
+    "url": "https://github.com/ogus/noise-map/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": " A procedural 2D map generator based on Perlin / simplex noise",
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "tape": "^4.10.1",
+    "uglify-js": "^3.4.9"
+  },
+  "homepage": "https://github.com/ogus/noise-map#readme",
+  "keywords": [
+    "procedural-generation",
+    "map",
+    "map-generator",
+    "perlin",
+    "simplex",
+    "noise"
+  ],
+  "license": "WTFPL",
+  "main": "src/noise-map.js",
+  "name": "noise-map",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ogus/noise-map.git"
+  },
+  "scripts": {
+    "build": "uglifyjs src/noise-map.js -c -m reserved=['NoiseMap','MapGenerator','HeightMap'] -o src/noise-map.min.js",
+    "test": "node test/test.js | faucet"
+  },
+  "version": "1.1.0"
+}
