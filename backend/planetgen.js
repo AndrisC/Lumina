@@ -4,7 +4,7 @@ import solarsysgen from "../backend/solarsysgen";
 export default {
     planetgen: function (number) {
        let allPlanet = [];
-        
+
         var planetNames = namegen.planetnamegen(number);
 
         console.warn(planetNames);
@@ -28,7 +28,7 @@ export default {
 
 
             //Generate radius between 5200 - 200 km
-            let newRadius = Math.floor(Math.random() * 50000) / 10 + 200;
+            let newRadius = Math.floor(Math.random() * (5200 - 200) + 200);
 
 
             //Generate moons max 8
@@ -36,14 +36,14 @@ export default {
 
 
             //generate type
-            var planetTypes = ["Star", "Ice", "Water", "Gas", "Earth", "Toxic"]
+            var planetTypes = ["Star", "Ice", "Water", "Gas", "Earth-like", "Toxic"]
             let newPlanetType = planetTypes[Math.floor(Math.random() * planetTypes.length)];
-            
-            
+
+
 
             //Generate animals if needed
 
-            
+
             //Generate vegetation if needed
 
 
@@ -60,41 +60,42 @@ export default {
 
 
             //Calculate the lenght of a day
-            
-            
+
+
             //Calculate the length of a year
 
 
             //Generate planetary ring
-            
-            
+
+
             //Liveable?
-            
+
+            //Generate seed
+            let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
 
             var planetInfo = {
-                planet: {
-                    id: newId,
-                    name: newName,
-                    orbitedStar: PLACEHOLDER,
-                    radius: newRadius,
-                    moons: newMoons,
-                    type: newPlanetType,
-                    animals: PLACEHOLDER,
-                    vegetation: PLACEHOLDER,
-                    Liveable: PLACEHOLDER,
-                    DistanceFromStar: newDistance,
-                    water:PLACEHOLDER,
-                    gas: PLACEHOLDER,
-                    civilization: PLACEHOLDER,
-                    lengthOfDay: PLACEHOLDER,
-                    lengthOfYear: PLACEHOLDER,
-                    planetaryRing: PLACEHOLDER
-                }
+                seed: newSeed,
+                id: newId,
+                name: newName,
+                orbitedStar: PLACEHOLDER,
+                radius: newRadius,
+                moons: newMoons,
+                type: newPlanetType,
+                animals: PLACEHOLDER,
+                vegetation: PLACEHOLDER,
+                Liveable: PLACEHOLDER,
+                DistanceFromStar: newDistance,
+                water:PLACEHOLDER,
+                gas: PLACEHOLDER,
+                civilization: PLACEHOLDER,
+                lengthOfDay: PLACEHOLDER,
+                lengthOfYear: PLACEHOLDER,
+                planetaryRing: PLACEHOLDER
             };
-            
+
             allPlanet.push(planetInfo);
-            
+
         }
-        return console.warn(allPlanet);
+        return allPlanet;
     }
 }

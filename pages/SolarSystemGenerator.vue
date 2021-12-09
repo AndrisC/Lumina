@@ -1,11 +1,19 @@
-<template id ="template">
-  <div id="app">
+<template>
+  <div class="container">
     <div class="IDK">
       <h1>Hit that button to generate a Solar System!</h1>
       <button @click="gimmeName(200)">Generate Planet Names</button>
       <button @click="randomSolar(14)">Generate Solarsystem</button>
     </div>
-    <router-view></router-view>
+
+    <div class="solar-system-wrapper">
+      <p>{{solarSystem.numberOfPlanets}}</p>
+      <div v-for="planet in solarSystem.planets" :key="planet.id" class="solar-system">
+        <lua-planet-generator v-if="generated" :planet="planet"/>
+        <p>{{planet.name}} - {{planet.type}} - {{planet.radius}}</p>
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,26 +24,38 @@ import VueRouter from "vue-router";
 //import planetNameGenerator from "./namegen.js";
 import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen.js";
-
-Vue.prototype.$eventBus = new Vue();
-
-Vue.use(VueRouter);
-
 export default {
+  data() {
+    return {
+        generated: false,
+        solarSystem: {}
+    }
+  },
   methods: {
-    gimmeName: function (a) {
-      return console.warn(namegen.planetnamegen(a));
+    gimmeName(a) {
+      return console.warn(namegen.planetnamegen(a))
+      // this.generated = true
     },
-
-    randomSolar: function (a) {
-      return console.warn(solarsysgen.solarsysgen(a));
+    randomSolar(a) {
+      this.generatd = false
+      this.solarSystem = solarsysgen.solarsysgen(a)
+      this.generated = true
+      this.$forceUpdate()
     },
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 h1 {
   color: wheat;
+  font-size: $heading_2;
+}
+.solar-system-wrapper {
+  font-size: 18px;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
 }
 </style>

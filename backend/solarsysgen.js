@@ -4,27 +4,26 @@ import planetgen from "./planetgen.js";
 export default {
     solarsysgen: function (max) {
         var solarSysInfo = {
-            solarSystem: {
-                solarSystemName: "",
-                numberOfPlanets: "",
-                starName: "",
-            }
+            solarSystemName: "",
+            numberOfPlanets: "",
+            starName: "",
+            planets: [],
         };
-        
+
         //Generate the name of the solar sys
         var solarSystemNamegen = namegen.planetnamegen(1);
-        solarSysInfo.solarSystem.solarSystemName = solarSystemNamegen[0];
+        solarSysInfo.solarSystemName = solarSystemNamegen[0];
 
         //Generate the name of the star
         var starNamegen = namegen.planetnamegen(1);
-        solarSysInfo.solarSystem.starName = starNamegen[0];
+        solarSysInfo.starName = starNamegen[0];
 
         //Generate the numbers of the planets
-        var numberOfPlanetsgen = (Math.floor(Math.random() * max));
-        solarSysInfo.solarSystem.numberOfPlanets = numberOfPlanetsgen;
+        var numberOfPlanetsgen = (Math.floor(Math.random() * max + 1));
+        solarSysInfo.numberOfPlanets = numberOfPlanetsgen;
 
         //Generate the planets
-        planetgen.planetgen(numberOfPlanetsgen);
+        solarSysInfo.planets = planetgen.planetgen(numberOfPlanetsgen);
 
 
         return solarSysInfo;
