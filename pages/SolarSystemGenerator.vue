@@ -8,10 +8,14 @@
 
     <div class="solar-system-wrapper">
       <p>{{solarSystem.numberOfPlanets}}</p>
-      <div v-for="planet in solarSystem.planets" :key="planet.id" class="solar-system">
+      <div v-if="solarSystem.star" class="star-wrapper">
+        <lua-planet-generator v-if="generated" :planet="solarSystem.star"/>
+        <p>{{solarSystem.star.name}} - {{solarSystem.star.type}} - {{solarSystem.star.radius}}</p>
+      </div>
+
+      <div v-for="planet in solarSystem.planets" :key="planet._id" class="solar-system">
         <lua-planet-generator v-if="generated" :planet="planet"/>
         <p>{{planet.name}} - {{planet.type}} - {{planet.radius}}</p>
-
       </div>
     </div>
   </div>

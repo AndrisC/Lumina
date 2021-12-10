@@ -2,7 +2,7 @@
   <div class="canvas-container">
     <div :style="planetVars" class="planet">
       <div class="wrap">
-         <canvas :id="planet.id" class="background" :style="bgVars"></canvas>
+         <canvas :id="planet._id" class="background" :style="bgVars"></canvas>
          <div v-if="planet.type == 'Earth-like' || planet.type == 'Ice'" :style="planetVars" class="clouds"></div>
       </div>
       <div class="mask"></div>
@@ -52,7 +52,7 @@ export default {
       })
       var heightmap = generator.createMap(400, 200, {type: 'simplex'})
 
-      var context = document.getElementById(this.$props.planet.id).getContext('2d')
+      var context = document.getElementById(this.$props.planet._id).getContext('2d')
       heightmap.draw(context, 100, 100, this.$props.planet.type)
     }
   }

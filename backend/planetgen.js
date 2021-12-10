@@ -2,12 +2,12 @@ import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen";
 
 export default {
-    planetgen: function (number) {
+    planetgen: function (number, star) {
        let allPlanet = [];
 
         var planetNames = namegen.planetnamegen(number);
 
-        console.warn(planetNames);
+        // console.warn(planetNames);
         for (let i = 0; i <= number-1; i++) {
 
 
@@ -16,15 +16,11 @@ export default {
 
 
             //Generate id
-            var newId = i;
+            var newId = i + 1;
 
 
             //Generate the name of the planet
-            var newName = planetNames[0+i];
-
-
-            //Get the name of the orbited star
-
+            var newName = planetNames[i];
 
 
             //Generate radius between 5200 - 200 km
@@ -36,9 +32,8 @@ export default {
 
 
             //generate type
-            var planetTypes = ["Star", "Ice", "Water", "Gas", "Earth-like", "Toxic"]
+            var planetTypes = ["Ice", "Water", "Gas", "Earth-like", "Toxic"]
             let newPlanetType = planetTypes[Math.floor(Math.random() * planetTypes.length)];
-
 
 
             //Generate animals if needed
@@ -73,11 +68,15 @@ export default {
             //Generate seed
             let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
 
+            if (star) {
+
+            }
+
             var planetInfo = {
                 seed: newSeed,
-                id: newId,
+                _id: newId,
                 name: newName,
-                orbitedStar: PLACEHOLDER,
+                orbitedStar: star,
                 radius: newRadius,
                 moons: newMoons,
                 type: newPlanetType,
@@ -97,5 +96,24 @@ export default {
 
         }
         return allPlanet;
+    },
+    stargen() {
+      //Generate seed
+      let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
+      //Generate id
+      var newId = 0;
+      //Generate star name
+      var starName = namegen.planetnamegen(1);
+      //Generate radius between 5200 - 1000 km
+      let newRadius = Math.floor(Math.random() * (5200 - 1000) + 1000);
+
+      var star = {
+        seed: newSeed,
+        _id: newId,
+        name: starName[0],
+        radius: newRadius,
+        type: "Star",
+      };
+      return star;
     }
 }

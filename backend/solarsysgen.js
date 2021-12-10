@@ -7,6 +7,7 @@ export default {
             solarSystemName: "",
             numberOfPlanets: "",
             starName: "",
+            star: {},
             planets: [],
         };
 
@@ -22,9 +23,10 @@ export default {
         var numberOfPlanetsgen = (Math.floor(Math.random() * max + 1));
         solarSysInfo.numberOfPlanets = numberOfPlanetsgen;
 
-        //Generate the planets
-        solarSysInfo.planets = planetgen.planetgen(numberOfPlanetsgen);
+        //Generate the star and the planets
+        solarSysInfo.star = planetgen.stargen();
 
+        solarSysInfo.planets = planetgen.planetgen(numberOfPlanetsgen, solarSysInfo.star);
 
         return solarSysInfo;
     }
