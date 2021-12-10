@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="canvas-container">
-    <div :style="planetVars" class="planet">
+    <div :style="planetVars" class="planet" :class="{'star-glow': planet.type == 'Star'}">
       <div class="wrap">
          <canvas :id="planet._id" class="background" :style="bgVars"></canvas>
          <div v-if="planet.type == 'Earth-like' || planet.type == 'Ice'" :style="planetVars" class="clouds"></div>
@@ -26,15 +26,25 @@ export default {
   },
   computed: {
     planetVars() {
-      return {
-        '--radius': Math.floor(this.$props.planet.radius / 10) + 'px',
+      if (this.$props.type == 'Star') {
+        return  {'--radius': Math.floor(this.$props.planet.radius / 15) + 'px'}
       }
+      return  {'--radius': Math.floor(this.$props.planet.radius / 20) + 'px'}
     },
     bgVars() {
-      return {
-        '--width': Math.floor(this.$props.planet.radius / 10) * 2 + 'px',
-        '--height': Math.floor(this.$props.planet.radius / 10) + 'px',
-        '--minusheight': '-' + Math.floor(this.$props.planet.radius / 10) + 'px',
+      if (this.$props.type == 'Star') {
+        return {
+          '--width': Math.floor(this.$props.planet.radius / 15) * 2 + 'px',
+          '--height': Math.floor(this.$props.planet.radius / 15) + 'px',
+          '--minusheight': '-' + Math.floor(this.$props.planet.radius / 15) + 'px',
+        }
+      }
+      else {
+        return {
+          '--width': Math.floor(this.$props.planet.radius / 20) * 2 + 'px',
+          '--height': Math.floor(this.$props.planet.radius / 20) + 'px',
+          '--minusheight': '-' + Math.floor(this.$props.planet.radius / 20) + 'px',
+        }
       }
     },
   },
@@ -44,7 +54,7 @@ export default {
 
       var generator = new NoiseMap.MapGenerator(this.$props.planet.seed, {
         type: 'simplex',
-        amplitude: 0.1,
+        amplitude: Math.random(0.8 - 0.1) + 0.1,
         planetType: this.$props.planet.type,
         frequency: Math.random(0.8 - 0.1) + 0.1,
         amplitudeCoef: Math.random(0.8 - 0.1) + 0.1,
@@ -66,16 +76,22 @@ export default {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 0 60px -20px rgba(#fff, 0.72), -14px -15px 40px -10px rgba(#fff, 0.23);
+  box-shadow: 0 0 60px -20px rgba(#fff, 0.22), -14px -15px 40px -10px rgba(#fff, 0.08);
+}
+.star-glow {
+  box-shadow: 0 0 60px -20px rgba(#fff8cb, 0.92), -10px -11px 40px -10px rgba(#ffe958, 0.53);
 }
 .mask {
   width:100%;
   height:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   box-shadow:inset -10px -10px 40px #251303, inset 10px 10px 30px -10px rgba(#fff, 0.6);
   border-radius:50%;
 }
 .background {
-  animation: rotate 50s infinite linear;
+  animation: rotate 10s infinite linear;
   width: var(--width);
   height: var(--height);
   position: absolute;
@@ -87,7 +103,7 @@ export default {
   height: var(--radius);
   background-size:  cover;
   border-radius:50%;
-  animation: translateBackground 50s infinite linear;
+  animation: translateBackground 15s infinite linear;
   opacity: 0.3;
 }
 .wrap {

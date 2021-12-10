@@ -96,9 +96,6 @@ export default {
     backdrop-filter: blur(1px);
     // background-color: rgba(105, 165, 255, 0.5);
   }
-  .warning {
-    display: none;
-  }
 }
 .one-menu {
   padding: $space-xs $space-l;

@@ -24,7 +24,7 @@ export default {
 
 
             //Generate radius between 5200 - 200 km
-            let newRadius = Math.floor(Math.random() * (5200 - 200) + 200);
+            let newRadius = Math.floor(Math.random() * (3200 - 400) + 400);
 
 
             //Generate moons max 8

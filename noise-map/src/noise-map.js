@@ -277,6 +277,7 @@
       }
     },
 
+
     scaleValues: function (expCoeff) {
       var coeff = Math.max( Math.min(expCoeff, 2), 0.5);
       if (coeff != 1) {
@@ -306,6 +307,7 @@
       var cellHeight = Math.ceil(outputHeight / this.height);
       var colorizer = new Colorizer(planetType);
       var shadow = !!enableShadow;
+
       for (var i = 0; i < this.width; i++) {
         for (var j = 0; j < this.height; j++) {
           context.fillStyle = colorizer.getColor(this.get(i, j));
@@ -336,39 +338,41 @@
     }
   };
 
-  var _starColorMatrix = {
-    R: [[0, Math.random() * (255 - 100) + 100],[255,255]],
-    G: [[0, Math.random() * (150 - 10) + 10],[255,255]],
-    B: [[0, Math.random() * (250 - 0) + 0],[255, Math.random() * (30 - 0) + 0]]
-  };
-  var _iceColorMatrix = {
-    R: [[0,Math.random() * (240 - 230) + 230],[126,Math.random() * (255 - 210) + 210],[127,Math.random() * (255 - 230) + 230],[191,229],[223,240],[255,222]],
-    G: [[0,Math.random() * (240 - 230) + 230],[126,Math.random() * (255 - 210) + 210],[127,Math.random() * (255 - 240) + 240],[191,247],[223,240],[255,250]],
-    B: [[0,Math.random() * (255 - 250) + 250],[126,Math.random() * (255 - 210) + 210],[127,Math.random() * (255 - 250) + 250],[191,255],[223,240],[255,255]]
-  };
-  var _waterColorMatrix = {
-    R: [[0,10],[191,Math.random() * (60 - 40) + 40],[223,Math.random() * (95 - 0) + 0],[255,Math.random() * (45 - 0) + 0]],
-    G: [[0,0],[191,Math.random() * (110 - 90) + 90],[223,Math.random() * (95 - 0) + 0],[255,Math.random() * (55 - 0) + 0]],
-    B: [[0,49],[191,Math.random() * (245 - 220) + 220],[223,Math.random() * (255 - 200) + 230],[255,Math.random() * (255 - 210) + 210]]
-  };
-  var _gasColorMatrix = {
-    R: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
-    G: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
-    B: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]]
-  };
-  var _toxicColorMatrix = {
-    R: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
-    G: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
-    B: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]]
-  };
-  var _earthColorMatrix = {
-    R: [[0,2],[63,9],[126,17],[127,69],[128,42],[191,115],[225,153],[250,179],[255,255]],
-    G: [[0,43],[63,62],[126,82],[127,108],[128,102],[191,128],[225,143],[250,179],[255,255]],
-    B: [[0,68],[63,92],[126,112],[127,118],[128,41],[191,77],[225,92],[250,179],[255,255]]
-  };
 
   function Colorizer(mapStyle) {
     this._colorMatrix = null;
+
+    let _starColorMatrix = {
+      R: [[0, Math.random() * (255 - 100) + 100],[255,255]],
+      G: [[0, Math.random() * (250 - 10) + 10],[255,255]],
+      B: [[0, Math.random() * (250 - 0) + 0],[255, Math.random() * (30 - 0) + 0]]
+    };
+    let _iceColorMatrix = {
+      R: [[0,Math.random() * (240 - 230) + 230],[126,Math.random() * (255 - 210) + 210],[127,Math.random() * (255 - 230) + 230],[191,229],[223,240],[255,222]],
+      G: [[0,Math.random() * (240 - 230) + 230],[126,Math.random() * (255 - 210) + 210],[127,Math.random() * (255 - 240) + 240],[191,247],[223,240],[255,250]],
+      B: [[0,Math.random() * (255 - 250) + 250],[126,Math.random() * (255 - 210) + 210],[127,Math.random() * (255 - 250) + 250],[191,255],[223,240],[255,255]]
+    };
+    let _waterColorMatrix = {
+      R: [[0,10],[191,Math.random() * (60 - 40) + 40],[223,Math.random() * (95 - 0) + 0],[255,Math.random() * (45 - 0) + 0]],
+      G: [[0,0],[191,Math.random() * (110 - 90) + 90],[223,Math.random() * (95 - 0) + 0],[255,Math.random() * (55 - 0) + 0]],
+      B: [[0,49],[191,Math.random() * (245 - 220) + 220],[223,Math.random() * (255 - 200) + 230],[255,Math.random() * (255 - 210) + 210]]
+    };
+    let _gasColorMatrix = {
+      R: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
+      G: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
+      B: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]]
+    };
+    let _toxicColorMatrix = {
+      R: [[0,Math.random() * (255 - 0)],[255,Math.random() * (50 - 0)]],
+      G: [[0,Math.random() * (255 - 0)],[255,Math.random() * (255 - 0)]],
+      B: [[0,Math.random() * (255 - 0)],[255,Math.random() * (50 - 0)]]
+    };
+    let _earthColorMatrix = {
+      R: [[0,2],[63,9],[126,17],[127,69],[128,42],[191,115],[225,153],[250,179],[255,255]],
+      G: [[0,43],[63,62],[126,82],[127,108],[128,102],[191,128],[225,143],[250,179],[255,255]],
+      B: [[0,68],[63,92],[126,112],[127,118],[128,41],[191,77],[225,92],[250,179],[255,255]]
+    };
+
     switch (mapStyle) {
       case 'Star':
         this._colorMatrix = _starColorMatrix;
