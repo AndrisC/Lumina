@@ -20,7 +20,7 @@ export default {
         solarSysInfo.starName = starNamegen[0];
 
         //Generate the numbers of the planets
-        var numberOfPlanetsgen = (Math.floor(Math.random() * max + 1));
+        var numberOfPlanetsgen = 30//(Math.floor(Math.random() * max + 1));
         solarSysInfo.numberOfPlanets = numberOfPlanetsgen;
 
         //Generate the star and the planets

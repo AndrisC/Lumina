@@ -19,7 +19,7 @@
 
         <div class="planets-wrapper">
           <!-- <div v-for="(planet, index) in solarSystem.planets" :key="planet._id" :class="['group-' + planet._id, 'planet']" :style="starRadius"> -->
-          <div v-for="(planet, index) in solarSystem.planets" :key="planet._id" class="planet" :style="starRadius">
+          <div v-for="planet in solarSystem.planets" :key="planet._id" class="planet" :style="starRadius">
             <lua-planet-generator v-if="planet" :planet="planet"/>
             <dl class="infos">
               <dt>{{planet.name}}</dt>
@@ -40,6 +40,8 @@ import VueRouter from "vue-router";
 //import planetNameGenerator from "./namegen.js";
 import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen.js";
+import luaPlanetGenerator from '~/components/lua-planet-generator'
+
 export default {
   data() {
     return {
@@ -83,6 +85,9 @@ export default {
       this.$forceUpdate()
     },
   },
+  components: {
+    luaPlanetGenerator,
+  }
 };
 </script>
 

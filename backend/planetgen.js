@@ -31,12 +31,10 @@ export default {
             let newMoons = Math.floor(Math.random() * 8);
 
 
-            //generate type
-            var planetTypes = ["Ice", "Water", "Gas", "Earth-like", "Toxic"]
-            let newPlanetType = planetTypes[Math.floor(Math.random() * planetTypes.length)];
+            
 
 
-            //Generate animals if needed
+
 
 
             //Generate vegetation if needed
@@ -48,8 +46,46 @@ export default {
             //Generate surface water if needed
 
 
-            //Generate the amount of gas
+            //Generate gases
 
+            var newHydrogen = Math.floor(Math.random() * (100 - 0));
+            var newHelium = Math.floor(Math.random() * (100 - 0));
+            var newNitrogen = Math.floor(Math.random() * (100 - 0));
+            var newOxygen = Math.floor(Math.random() * (100 - 0));
+            var newWater = Math.floor(Math.random() * (100 - 0));
+            var newOther = Math.floor(Math.random() * (100 - 0));
+
+            let gasesSum = newHydrogen + newHelium + newNitrogen + newOxygen + newWater + newOther;
+
+            newHydrogen = 100 / gasesSum * newHydrogen;
+            newHelium = 100 / gasesSum * newHelium;
+            newNitrogen = 100 / gasesSum * newNitrogen;
+            newOxygen = 100 / gasesSum * newOxygen;
+            newWater = 100 / gasesSum * newWater;
+            newOther = 100 / gasesSum * newOther;
+
+            gasesSum = gasesSum = newHydrogen + newHelium + newNitrogen + newOxygen + newWater + newOther;
+
+            //generate type
+            
+            let newPlanetType = "Toxic"
+
+
+            if (newDistance >= 60 && newDistance <= 180) {
+                newPlanetType = "Water";
+                if (newNitrogen >= 25 && newOxygen >= 8) {
+                    newPlanetType = "Earth-like";
+                }
+            } else if (newDistance >= 170 && newWater >= 20) {
+                
+                newPlanetType = "Ice";
+            } else if (newOxygen <= 10 && newHydrogen >= 40) {
+                newPlanetType = "Gas";
+            }
+
+
+            //Generate animals if needed
+            let newAnimals = [];
 
             //Generate civilization if needed
 
@@ -68,32 +104,38 @@ export default {
             //Generate seed
             let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
 
-            if (star) {
 
-            }
-
+            
             var planetInfo = {
                 seed: newSeed,
                 _id: newId,
                 name: newName,
                 orbitedStar: star,
                 radius: newRadius,
+                mass: "",
                 moons: newMoons,
                 type: newPlanetType,
                 animals: PLACEHOLDER,
                 vegetation: PLACEHOLDER,
-                Liveable: PLACEHOLDER,
-                DistanceFromStar: newDistance,
-                water:PLACEHOLDER,
-                gas: PLACEHOLDER,
+                liveable: PLACEHOLDER,
+                distanceFromStar: newDistance,
+                surfaceWater:PLACEHOLDER,
+                gas: {
+                    nitrogen: newNitrogen,
+                    oxygen: newOxygen,
+                    water: newWater,
+                    hydrogen: newHydrogen,
+                    helium: newHelium,
+                    other: newOther
+                },
                 civilization: PLACEHOLDER,
                 lengthOfDay: PLACEHOLDER,
                 lengthOfYear: PLACEHOLDER,
                 planetaryRing: PLACEHOLDER
             };
-
+            console.warn(planetInfo);
             allPlanet.push(planetInfo);
-
+            
         }
         return allPlanet;
     },
@@ -112,6 +154,8 @@ export default {
         _id: newId,
         name: starName[0],
         radius: newRadius,
+        mass: "",
+        surfaceTemperature: "",
         type: "Star",
       };
       return star;
