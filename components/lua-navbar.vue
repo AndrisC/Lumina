@@ -82,19 +82,18 @@ export default {
 }
 .menu-dropdown {
   position: absolute;
-  // background-color: rgba(255, 255, 255, 0.95);
   border: 1px solid #FFF;
   border-radius: $radius-small;
   overflow: hidden;
   top: 50px;
   right: 20px;
   z-index: 100;
+  box-shadow: $box-shadow;
 }
 @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
   .menu-dropdown {
-    -webkit-backdrop-filter: blur(1px);
-    backdrop-filter: blur(1px);
-    // background-color: rgba(105, 165, 255, 0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
   }
 }
 .one-menu {

@@ -26,7 +26,7 @@ export default {
 
 <style lang="sass">
 html
-  font-family: Inter
+  font-family: Lato
   font-size: 18px
   word-spacing: 1px
   -ms-text-size-adjust: 100%
