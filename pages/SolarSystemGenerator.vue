@@ -2,25 +2,67 @@
   <div class="container">
     <div class="side-panel">
       <!-- <button @click="gimmeName(200)">Generate Planet Names</button> -->
-      <lua-button type="outlined" @click="randomSolar(14)">Generate</lua-button>
+      <h4></h4>
+      <div class="generate-container">
+        <lua-button @click="randomSolar(14)">Generate star system</lua-button>
+      </div>
     </div>
 
-    <div class="solar-system-container">
+    <div v-if="generated" class="solar-system-container">
       <div class="system-header">
-        <h4>{{solarSystem.solarSystemName}}</h4>
-        <h5>Number of planets: {{solarSystem.numberOfPlanets}}</h5>
+        <div class="system-info">
+          <div class="sys-name-container">
+            <h4 class="sys-name-title">System</h4>
+            <h4 class="sys-name">{{solarSystem.solarSystemName}}</h4>
+          </div>
+          <div class="planetnumber-container">
+            <h5 class="planetnumber-title">Number of planets: </h5>
+            <h5 class="planetnumber">{{solarSystem.numberOfPlanets}}</h5>
+          </div>
+        </div>
+
+        <div v-if="solarSystem.star" class="star-wrapper" :style="starRadius">
+          <div class="star-container">
+            <div class="star">
+              <luaPlanetGenerator :planet="solarSystem.star"/>
+            </div>
+
+            <div class="star-info">
+              <div class="top-info">
+                <div class="info-container">
+                  <h4>{{solarSystem.star.name}}</h4>
+                </div>
+                <div class="info-container">
+                  <p>Star of the system</p>
+                </div>
+              </div>
+
+              <div class="bottom-info">
+                <div class="info-container">
+                  <h5>Class M Star</h5>
+                  <!-- <h5>M</h5>
+                  <h5>star</h5> -->
+                </div>
+                <div class="info-container">
+                  <h5>Radius:</h5>
+                  <h5>{{solarSystem.star.radius}} km</h5>
+                </div>
+                <div class="info-container">
+                  <h5>Temperature:</h5>
+                  <h5>3,800 K</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="solar-system-wrapper">
-        <div v-if="solarSystem.star" class="star-wrapper">
-          <lua-planet-generator  :planet="solarSystem.star"/>
-          <p>{{solarSystem.star.name}} - {{solarSystem.star.type}} - {{solarSystem.star.radius}}</p>
-        </div>
 
         <div class="planets-wrapper">
           <!-- <div v-for="(planet, index) in solarSystem.planets" :key="planet._id" :class="['group-' + planet._id, 'planet']" :style="starRadius"> -->
           <div v-for="(planet, index) in solarSystem.planets" :key="planet._id" class="planet" :style="starRadius">
-            <lua-planet-generator v-if="planet" :planet="planet"/>
+            <luaPlanetGenerator :planet="planet"/>
             <dl class="infos">
               <dt>{{planet.name}}</dt>
               <dd><span>{{planet.type}}</span></dd>
@@ -40,6 +82,8 @@ import VueRouter from "vue-router";
 //import planetNameGenerator from "./namegen.js";
 import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen.js";
+import luaPlanetGenerator from '~/components/lua-planet-generator'
+
 export default {
   data() {
     return {
@@ -49,7 +93,7 @@ export default {
   },
   computed: {
     starRadius() {
-      return  {'--radius': Math.floor(this.solarSystem.star.radius / 15) + 'px'}
+      return  {'--radius': '-' + Math.floor(this.solarSystem.star.radius / 13) + 'px'}
     }
   },
   methods: {
@@ -83,18 +127,21 @@ export default {
       this.$forceUpdate()
     },
   },
+  components: {
+    luaPlanetGenerator,
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
   display: flex;
+  flex-direction: column;
   padding-top: $space-s;
 }
 .side-panel {
-  width: 20%;
-  min-width: 250px;
-  height: calc(100vh - 146px);
+  color: rgba(#fff, .9);
+  width: 90%;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   background-color: rgba(73, 72, 72, 0.3);
@@ -103,14 +150,15 @@ export default {
   z-index: 10;
 
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: $space-s;
 
-  h1 {
-    color: wheat;
-    font-size: $heading_2;
+  h4 {
+    font-weight: 400;
   }
+}
+.generate-container {
+  max-width: 300px;
 }
 .solar-system-container {
   padding: 0 $space-m;
@@ -120,29 +168,57 @@ export default {
 .system-header {
   color: white;
   display: flex;
-  align-items: baseline;
+  padding: $space-m;
 
   h4 {
-    margin-right: $space-s;
+    margin-right: $space-xs;
   }
   h5 {
-    font-weight: 400;
+    margin: $space-xs $space-xs 0 0;
+    font-weight: 300;
+    font-size: 20px;
   }
+}
+.system-info {
+  padding: $space-s 0 0 $space-xs;
+  opacity: .9;
+}
+.sys-name-container, .planetnumber-container  {
+  display: flex;
 }
 .solar-system-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: 100%;
+  width: 100%;
   padding: $space-m 0;
   font-size: 18px;
-  width: 80%;
   color: white;
 }
 .star-wrapper {
+  margin: 0 auto;
+}
+.star-container {
+  display: flex;
+  align-items: center;
+}
+.star-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  padding: $space-m 0 $space-m $space-l;
+  opacity: .8;
+}
+.top-info {
+  margin-bottom: $space-s;
+
+  p {
+    font-weight: 300;
+  }
+}
+.info-container {
+  display: flex;
 }
 .planets-wrapper {
   display: flex;
@@ -154,6 +230,7 @@ export default {
 }
 .planet {
   position: relative;
+  z-index: 10;
   margin-right: 90px;
 }
 dl.infos {
@@ -165,7 +242,8 @@ dl.infos {
   margin-top: -90%;
   margin-left: 90%;
   padding-left: 100%;
-  opacity: .7;
+  cursor: pointer;
+  user-select: none;
 }
 //line
 dl.infos:before {
@@ -180,26 +258,32 @@ dl.infos:before {
   transform-style: preserve-3d;
   transform: skew(-45deg, 0deg);
   box-shadow: inset 1px 1px black;
+  transition: all .4s ease;
+  opacity: .7;
 }
 
 dl.infos dt {
   position: absolute;
-  left: 50px;
+  left: 48px;
   margin-bottom: 26px;
-  bottom: 16px;
+  bottom: 14px;
   width: 200px;
   color: #FFF;
-  font-size: 12px;
+  font-size: 16px;
   text-shadow: 1px 1px 2px black;
+  transition: all .4s ease;
+  opacity: .7;
 }
 dl.infos dd{
   position: absolute;
-  left: 50px;
-  bottom: 20px;
+  left: 48px;
+  bottom: 18px;
   width: 300px;
   color: #FFF;
-  font-size: 18px;
+  font-size: 22px;
   text-shadow: 1px 1px 2px black;
+  transition: all .4s ease;
+  opacity: .8;
 }
 dl.infos p {
   position: absolute;
@@ -208,7 +292,9 @@ dl.infos p {
   width: 150px;
   font-weight: 300;
   color: #FFF;
-  font-size: 11px;
+  font-size: 14px;
   text-shadow: 1px 1px 2px black;
+  transition: all .4s ease;
+  opacity: .7;
 }
 </style>

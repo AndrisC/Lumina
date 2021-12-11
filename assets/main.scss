@@ -1,26 +1,26 @@
 h1 {
   @include responsive-font(8vw, 42px, $jumbo, $jumbo);
-  font-family: Muli;
+  font-family: Lato;
 }
 h2 {
   @include responsive-font(5vw, 30px, $title, $title);
-  font-family: Muli;
+  font-family: Lato;
 }
 h3 {
   @include responsive-font(4vw, 28px, $heading_1, $heading_1);
-  font-family: Muli;
+  font-family: Lato;
 }
 h4 {
   @include responsive-font(3vw, 22px, $heading_2, $heading_2);
-  font-family: Muli;
+  font-family: Lato;
 }
 h5 {
   @include responsive-font(2vw, 20px, $heading_3, $heading_3);
-  font-family: Muli;
+  font-family: Lato;
 }
 h6 {
   @include responsive-font(2vw, 18px, $heading_4, $heading_4);
-  font-family: Muli;
+  font-family: Lato;
 }
 p {
   @include responsive-font(1vw, $paragraph, $paragraph, $paragraph);

@@ -27,33 +27,45 @@ export default {
 <style lang="scss" scoped>
 button {
   transition: all .3s;
-  font-weight: 500;
-  height: 40px;
+  font-family: lato;
+  font-weight: 400;
+  height: 45px;
   position: relative;
   padding: $space-xs $space-m;
   overflow: hidden;
-  // border-radius: $radius-default;
+  border-radius: $radius-default;
   border: none;
   cursor: pointer;
   outline: none;
   user-select: none;
-  transition: all .6s ease;
+  transition: all .3s ease;
   font-size: $paragraph;
   background: none;
 
   &:hover {
-    // background: $secondary-dark-100;
+    // background: rgba(255, 255, 255, .7);
+    border: 2px solid rgba(#fff, .7);
   }
   &:focus {
-    // background: $secondary-dark-100;
+    // background: rgba(255, 255, 255, .7);
+    border: 2px solid rgba(#fff, .7);
   }
   &:active {
-    // background: $secondary-dark-200;
+    box-shadow:
+    inset  7px 7px 8px 0 rgba(0, 0, 0, 0.25),
+    inset -3px -3px 5px 0 rgba(200, 200, 200, 0.3);
+    // background: rgba(255, 255, 255, .7);
+    border: 2px solid rgba(#fff, .7);
   }
 }
 .contained {
-  // background: $secondary-color;
-  color: #FFF;
+  // background: rgba(255, 255, 255, .7);
+  border: 2px solid rgba(#fff, .7);
+  border-radius: 10px;
+  color: #fff;
+  box-shadow:
+    7px 7px 8px 0 rgba(0, 0, 0, 0.25),
+   -3px -3px 5px 0 rgba(200, 200, 200, 0.3);
 }
 .secondary {
   color: #FFF;

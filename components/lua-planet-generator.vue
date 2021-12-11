@@ -27,23 +27,25 @@ export default {
   computed: {
     planetVars() {
       if (this.$props.type == 'Star') {
-        return  {'--radius': Math.floor(this.$props.planet.radius / 15) + 'px'}
+        return  {'--radius': Math.floor(this.$props.planet.radius / 13) + 'px'}
+        return  {'--hoverRadius': Math.floor(this.$props.planet.radius / 12) + 'px'}
       }
-      return  {'--radius': Math.floor(this.$props.planet.radius / 20) + 'px'}
+      return  {'--radius': Math.floor(this.$props.planet.radius / 14) + 'px'}
+      return  {'--hoverRadius': Math.floor(this.$props.planet.radius / 13) + 'px'}
     },
     bgVars() {
       if (this.$props.type == 'Star') {
         return {
-          '--width': Math.floor(this.$props.planet.radius / 15) * 2 + 'px',
-          '--height': Math.floor(this.$props.planet.radius / 15) + 'px',
-          '--minusheight': '-' + Math.floor(this.$props.planet.radius / 15) + 'px',
+          '--width': Math.floor(this.$props.planet.radius / 13) * 2 + 'px',
+          '--height': Math.floor(this.$props.planet.radius / 13) + 'px',
+          '--minusheight': '-' + Math.floor(this.$props.planet.radius / 13) + 'px',
         }
       }
       else {
         return {
-          '--width': Math.floor(this.$props.planet.radius / 20) * 2 + 'px',
-          '--height': Math.floor(this.$props.planet.radius / 20) + 'px',
-          '--minusheight': '-' + Math.floor(this.$props.planet.radius / 20) + 'px',
+          '--width': Math.floor(this.$props.planet.radius / 14) * 2 + 'px',
+          '--height': Math.floor(this.$props.planet.radius / 14) + 'px',
+          '--minusheight': '-' + Math.floor(this.$props.planet.radius / 14) + 'px',
         }
       }
     },
@@ -77,13 +79,19 @@ export default {
   overflow: hidden;
   position: relative;
   box-shadow: 0 0 60px -20px rgba(#fff, 0.22), -14px -15px 40px -10px rgba(#fff, 0.08);
+  cursor: pointer;
+  transition: all .4s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 .star-glow {
   box-shadow: 0 0 60px -20px rgba(#fff8cb, 0.92), -10px -11px 40px -10px rgba(#ffe958, 0.53);
 }
 .mask {
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -134,6 +142,16 @@ export default {
   }
   100% {
     transform:rotateZ(-360deg);
+  }
+}
+</style>
+
+<style lang="scss">
+.planet {
+  &:hover {
+    dl.infos:before, dl.infos dt, dl.infos dd, dl.infos p {
+      opacity: 1;
+    }
   }
 }
 </style>
