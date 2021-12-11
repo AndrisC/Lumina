@@ -146,8 +146,28 @@ export default {
       var newId = 0;
       //Generate star name
       var starName = namegen.planetnamegen(1);
-      //Generate radius between 5200 - 1000 km
-      let newRadius = Math.floor(Math.random() * (5200 - 1000) + 1000);
+      //Generate radius between 7200 - 4000 km
+      let newRadius = Math.floor(Math.random() * (7020 - 4000) + 4000);
+      //Generate surface temperature
+      let newTemperature = Math.floor(Math.random() * (36000 - 2400) + 4000);
+      //Calculate class from temp
+      var newClass = "Unknow class";
+      if (newTemperature <= 3700) {
+          newClass = "M class";
+      } else if (newTemperature >= 3700 && newTemperature <= 5200) {
+          newClass = "K class"
+      } else if (newTemperature >= 5200 && newTemperature <= 6000) {
+        newClass = "G class"
+    } else if (newTemperature >= 6000 && newTemperature <= 7500) {
+        newClass = "F class"
+    } else if (newTemperature >= 7500 && newTemperature <= 10000) {
+        newClass = "A class"
+    } else if (newTemperature >= 10000 && newTemperature <= 30000) {
+        newClass = "B class"
+    } else if (newTemperature >= 30000) {
+        newClass = "O class"
+    }
+
 
       var star = {
         seed: newSeed,
@@ -155,9 +175,11 @@ export default {
         name: starName[0],
         radius: newRadius,
         mass: "",
-        surfaceTemperature: "",
+        surfaceTemperature: newTemperature,
+        class: newClass,
         type: "Star",
       };
+      console.warn(star);
       return star;
     }
 }
