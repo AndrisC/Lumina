@@ -1,5 +1,7 @@
 import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen";
+import animalgen from "./animalgen.js";
+import civilizationgen from "./civilizationgen.js";
 
 export default {
     planetgen: function (number, star) {
@@ -71,23 +73,31 @@ export default {
             let newPlanetType = "Toxic"
 
 
-            if (newDistance >= 60 && newDistance <= 180) {
+            if (newDistance >= 60 && newDistance <= 200) {
                 newPlanetType = "Water";
-                if (newNitrogen >= 25 && newOxygen >= 8) {
+                if (newNitrogen >= 25 && newOxygen >= 6) {
                     newPlanetType = "Earth-like";
                 }
-            } else if (newDistance >= 170 && newWater >= 20) {
-                
-                newPlanetType = "Ice";
-            } else if (newOxygen <= 10 && newHydrogen >= 40) {
+            } else if (newHydrogen >= 25) {
                 newPlanetType = "Gas";
-            }
+            } else if (newDistance >= 180 && newWater >= 25) {
+                newPlanetType = "Ice";
+            } 
 
 
             //Generate animals if needed
-            let newAnimals = [];
+
+            //Ice-type animals
+
+            //var animalNames = animalgen.animalgen(0, 1);
+            //console.warn(animalNames);
+
+
+            //Water-type animals
+            
 
             //Generate civilization if needed
+            var newCivilization = civilizationgen.civilizationgen(); 
 
 
             //Calculate the lenght of a day
@@ -115,7 +125,10 @@ export default {
                 mass: "",
                 moons: newMoons,
                 type: newPlanetType,
-                animals: PLACEHOLDER,
+                animals: {
+                    name: "",
+                    description: "",
+                },
                 vegetation: PLACEHOLDER,
                 liveable: PLACEHOLDER,
                 distanceFromStar: newDistance,
@@ -128,7 +141,11 @@ export default {
                     helium: newHelium,
                     other: newOther
                 },
-                civilization: PLACEHOLDER,
+                civilization: {
+                    name: newCivilization[0],
+                    race: newCivilization[1],
+                    description: newCivilization[2],
+                },
                 lengthOfDay: PLACEHOLDER,
                 lengthOfYear: PLACEHOLDER,
                 planetaryRing: PLACEHOLDER
@@ -153,7 +170,7 @@ export default {
       //Calculate class from temp
       var newClass = "Unknow class";
       if (newTemperature <= 3700) {
-          newClass = "M class";
+          newClass = "M class";0
       } else if (newTemperature >= 3700 && newTemperature <= 5200) {
           newClass = "K class"
       } else if (newTemperature >= 5200 && newTemperature <= 6000) {
