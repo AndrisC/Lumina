@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="navbar-wrapper"  @click="close($event)">
-    <div class="title-wrapper">
+    <div @click="$router.push('/')" class="title-wrapper">
       <h3>Lumina</h3>
     </div>
 
@@ -57,6 +57,8 @@ export default {
 .title-wrapper {
   color: #FFF;
   z-index: 10;
+  user-select: none;
+  cursor: pointer;
 
   h3 {
     font-family: Lumina;
