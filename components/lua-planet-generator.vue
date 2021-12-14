@@ -81,6 +81,7 @@ export default {
   box-shadow: 0 0 60px -20px rgba(#fff, 0.22), -14px -15px 40px -10px rgba(#fff, 0.08);
   cursor: pointer;
   transition: all .4s ease;
+  z-index: 100;
 
   &:hover {
     transform: scale(1.05);
@@ -118,7 +119,8 @@ export default {
   width: var(--radius);
   height: var(--radius);
   border-radius:50%;
-  animation: rotatePlanet 150s infinite linear;
+  // animation: rotatePlanet 150s infinite linear;
+  transform:rotateZ(-25deg);
 }
 @keyframes translateBackground {
   0% {
@@ -136,14 +138,14 @@ export default {
     left: var(--minusheight);
   }
 }
-@keyframes rotatePlanet{
-  0% {
-    transform:rotateZ(0);
-  }
-  100% {
-    transform:rotateZ(-360deg);
-  }
-}
+// @keyframes rotatePlanet{
+//   0% {
+//     transform:rotateZ(0);
+//   }
+//   100% {
+//     transform:rotateZ(-360deg);
+//   }
+// }
 </style>
 
 <style lang="scss">

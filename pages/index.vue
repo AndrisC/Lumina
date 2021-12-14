@@ -150,13 +150,14 @@ export default {
   width:300px;
   height:300px;
   border-radius:50%;
-  animation: rotatePlanet 180s infinite linear;
+  // animation: rotatePlanet 180s infinite linear;
 }
 .e-wrap {
   width:300px;
   height:300px;
   border-radius:50%;
-  animation: rotatePlanet 110s infinite linear;
+  transform:rotateZ(-15deg);
+  // animation: rotatePlanet 110s infinite linear;
 }
 @keyframes translateBackground {
   0%{
@@ -166,13 +167,13 @@ export default {
     background-position-x:-600px;
   }
 }
-@keyframes rotatePlanet{
-  0%{
-    transform:rotateZ(0);
-  }
-  100%{
-    transform:rotateZ(-360deg);
-  }
-}
+// @keyframes rotatePlanet{
+//   0%{
+//     transform:rotateZ(0);
+//   }
+//   100%{
+//     transform:rotateZ(-360deg);
+//   }
+// }
 
 </style>

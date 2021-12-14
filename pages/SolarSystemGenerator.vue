@@ -39,7 +39,7 @@
 
               <div class="bottom-info">
                 <div class="info-container">
-                  <h5>Class M Star</h5>
+                  <h5>{{solarSystem.star.class}} Star</h5>
                   <!-- <h5>M</h5>
                   <h5>star</h5> -->
                 </div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="info-container">
                   <h5>Temperature:</h5>
-                  <h5>3,800 K</h5>
+                  <h5>{{solarSystem.star.surfaceTemperature}} K</h5>
                 </div>
               </div>
             </div>
@@ -140,8 +140,8 @@ export default {
   padding-top: $space-s;
 }
 .side-panel {
-  color: rgba(#fff, .9);
-  width: 90%;
+  // width: calc(300px + $space-m);
+  width: 250px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   background-color: rgba(73, 72, 72, 0.3);

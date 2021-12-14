@@ -48,7 +48,7 @@ export default {
             "They have extraordinary physical strength",
             "These creatures are super friendly",
             "Unlike humans, they know how to be happy",
-            "Their God is Adam Pongrácz and it makes a perfect sense, because he is a god, not like András. András is geh."
+            "Their God is András Csipszer and it makes a perfect sense, because he is a god, not like Ádám. Ádám is a zero level worm who cant even generate descriptions."
         ];
 
         var startPlural = [
@@ -93,7 +93,7 @@ export default {
         for (let i = 0; i <= num; i++) {
 
             var final = ["", "", ""];
-            
+
             var randomTypeOfSpecies = typeOfSpecies[Math.floor(Math.random() * typeOfSpecies.length)];
             var randomDescription = description[Math.floor(Math.random() * description.length)];
             var randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
@@ -111,5 +111,3 @@ export default {
     }
 
 }
-
-

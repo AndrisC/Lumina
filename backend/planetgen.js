@@ -33,7 +33,7 @@ export default {
             let newMoons = Math.floor(Math.random() * 8);
 
 
-            
+
 
 
 
@@ -69,7 +69,7 @@ export default {
             gasesSum = gasesSum = newHydrogen + newHelium + newNitrogen + newOxygen + newWater + newOther;
 
             //generate type
-            
+
             let newPlanetType = "Toxic"
 
 
@@ -82,7 +82,7 @@ export default {
                 newPlanetType = "Gas";
             } else if (newDistance >= 180 && newWater >= 25) {
                 newPlanetType = "Ice";
-            } 
+            }
 
 
             //Generate animals if needed
@@ -94,10 +94,10 @@ export default {
 
 
             //Water-type animals
-            
+
 
             //Generate civilization if needed
-            var newCivilization = civilizationgen.civilizationgen(); 
+            var newCivilization = civilizationgen.civilizationgen();
 
 
             //Calculate the lenght of a day
@@ -115,7 +115,7 @@ export default {
             let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
 
 
-            
+
             var planetInfo = {
                 seed: newSeed,
                 _id: newId,
@@ -152,7 +152,7 @@ export default {
             };
             console.warn(planetInfo);
             allPlanet.push(planetInfo);
-            
+
         }
         return allPlanet;
     },
@@ -170,19 +170,19 @@ export default {
       //Calculate class from temp
       var newClass = "Unknow class";
       if (newTemperature <= 3700) {
-          newClass = "M class";0
+          newClass = "Class M";0
       } else if (newTemperature >= 3700 && newTemperature <= 5200) {
-          newClass = "K class"
+          newClass = "Class K"
       } else if (newTemperature >= 5200 && newTemperature <= 6000) {
-        newClass = "G class"
+        newClass = "Class G"
     } else if (newTemperature >= 6000 && newTemperature <= 7500) {
-        newClass = "F class"
+        newClass = "Class F"
     } else if (newTemperature >= 7500 && newTemperature <= 10000) {
-        newClass = "A class"
+        newClass = "Class A"
     } else if (newTemperature >= 10000 && newTemperature <= 30000) {
-        newClass = "B class"
+        newClass = "Class B"
     } else if (newTemperature >= 30000) {
-        newClass = "O class"
+        newClass = "Class O"
     }
 
 
