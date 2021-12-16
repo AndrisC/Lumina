@@ -24,9 +24,9 @@
           </div>
         </div>
 
-        <div v-if="solarSystem.star && systemView" class="star-wrapper" :style="starRadius">
+        <div v-if="solarSystem.star" :class="{'hidden': showPlanet(solarSystem.star)}" class="star-wrapper" :style="starRadius">
           <div class="star-container">
-            <div class="star">
+            <div @click="zoomPlanet(solarSystem.star)" class="star">
               <luaPlanetGenerator :planet="solarSystem.star"/>
             </div>
 
@@ -60,11 +60,17 @@
 
       <div class="solar-system-wrapper" :class="{'zoomed-sys-wrapper': !systemView}">
         <div class="planets-wrapper">
-          <!-- <div v-for="(planet, index) in solarSystem.planets" :key="planet._id" :class="['group-' + planet._id, 'planet']" :style="starRadius"> -->
-          <div v-if="systemView || planet.name == selectedPlanet.name" @click="zoomPlanet(planet)" v-for="(planet, index) in solarSystem.planets" :key="planet._id" class="planet" :style="starRadius">
+          <div
+            @click="zoomPlanet(planet)"
+            v-for="(planet, index) in solarSystem.planets"
+            :key="planet._id"
+            class="planet"
+            :class="{'hidden': showPlanet(planet)}"
+            :style="starRadius"
+          >
             <luaPlanetGenerator :zoomed="planet.name == selectedPlanet.name" :planet="planet"/>
 
-            <dl class="infos" :class="{'zoomed-infos': selectedPlanet.name}">
+            <dl class="infos" v-if="selectedPlanet.type != 'Star'" :class="{'zoomed-infos': selectedPlanet.name}">
               <dt>{{planet.name}}</dt>
               <dd><span>{{planet.type}}</span></dd>
               <dd>
@@ -75,7 +81,7 @@
             </dl>
 
 
-            <dl v-if="!systemView" class="bottom-infos">
+            <dl v-if="!systemView && selectedPlanet.type != 'Star'" class="bottom-infos">
               <p>{{selectedPlanet.moons}} moons</p>
               <span>{{selectedPlanet.lengthOfYear}}</span>
               <span>{{selectedPlanet.lengthOfDay}}</span>
@@ -83,7 +89,7 @@
           </div>
         </div>
 
-        <div v-if="!systemView" class="main-infos-wrapper">
+        <div v-if="!systemView  && selectedPlanet.type != 'Star'" class="main-infos-wrapper">
           <div class="main-infos-container">
             <div class="one-info">
               <p>Orbited star</p>
@@ -182,6 +188,12 @@ export default {
     }
   },
   methods: {
+    showPlanet(planet) {
+      if (this.selectedPlanet.name) {
+        return this.selectedPlanet.name != planet.name
+      }
+      return false
+    },
     gimmeName(a) {
       return console.warn(namegen.planetnamegen(a))
       // this.generated = true
@@ -271,6 +283,9 @@ export default {
     font-weight: 300;
     font-size: 20px;
   }
+}
+.hidden {
+  display: none;
 }
 .system-info {
   padding-left: $space-xs;
