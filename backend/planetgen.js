@@ -133,14 +133,14 @@ export default {
                 liveable: PLACEHOLDER,
                 distanceFromStar: newDistance,
                 surfaceWater:PLACEHOLDER,
-                gas: {
-                    nitrogen: newNitrogen,
-                    oxygen: newOxygen,
-                    water: newWater,
-                    hydrogen: newHydrogen,
-                    helium: newHelium,
-                    other: newOther
-                },
+                gas: [
+                  {name: 'nitrogen', value: newNitrogen},
+                  {name: 'oxygen', value: newOxygen},
+                  {name: 'water', value: newWater},
+                  {name: 'hydrogen', value: newHydrogen},
+                  {name: 'helium', value: newHelium},
+                  {name: 'other', value: newOther}
+                ],
                 civilization: {
                     name: newCivilization[0],
                     race: newCivilization[1],

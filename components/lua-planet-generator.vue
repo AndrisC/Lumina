@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="canvas-container">
-    <div :style="planetVars" class="planet" :class="{'star-glow': planet.type == 'Star'}">
-      <div class="wrap">
-         <canvas :id="planet._id" class="background" :style="bgVars"></canvas>
-         <div v-if="planet.type == 'Earth-like' || planet.type == 'Ice'" :style="planetVars" class="clouds"></div>
+    <div :style="planetVars" class="planet" :class="{'star-glow': planet.type == 'Star', 'zoomed': zoomed}">
+      <div class="wrap" :class="{'zoomed-wrap': zoomed}">
+         <canvas :id="planet._id" class="background" :style="bgVars" :class="{'zoomed-canvas': zoomed}"></canvas>
+         <div v-if="planet.type == 'Earth-like' || planet.type == 'Ice'" :style="planetVars" class="clouds" :class="{'zoomed-clouds': zoomed}"></div>
       </div>
       <div class="mask"></div>
     </div>
@@ -17,13 +17,17 @@ export default {
       type: Object,
       default: () => {},
     },
+    zoomed: {
+      type: Boolean,
+      default: false
+    }
   },
   mounted() {
     this.generateSurface()
   },
-  updated() {
-    this.generateSurface()
-  },
+  // updated() {
+  //   this.generateSurface()
+  // },
   computed: {
     planetVars() {
       if (this.$props.type == 'Star') {
@@ -36,7 +40,7 @@ export default {
     bgVars() {
       if (this.$props.type == 'Star') {
         return {
-          '--width': Math.floor(this.$props.planet.radius / 13) * 2 + 'px',
+          '--width': Math.floor(this.$props.planet.radius / 13) * 1.5 + 'px',
           '--height': Math.floor(this.$props.planet.radius / 13) + 'px',
           '--minusheight': '-' + Math.floor(this.$props.planet.radius / 13) + 'px',
         }
@@ -72,6 +76,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.canvas-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
 .planet {
   width: var(--radius);
   height: var(--radius);
@@ -104,7 +113,9 @@ export default {
   width: var(--width);
   height: var(--height);
   position: absolute;
-  // border-radius:50%;
+  // top: 50%;
+  // bottom: 50%;
+  // transform: translate(-50%, 50%);
 }
 .clouds {
   background:url(http://artem.anmedio.ru/dev/planet/clouds.png) repeat-x;
@@ -121,6 +132,18 @@ export default {
   border-radius:50%;
   // animation: rotatePlanet 150s infinite linear;
   transform:rotateZ(-25deg);
+}
+.zoomed, .zoomed-wrap, .zoomed-clouds {
+  width: 600px;
+  height: 600px;
+
+  // &:hover {
+  //   transform: scale(1);
+  // }
+}
+.zoomed-canvas {
+  width: 1200px;
+  height: 600px;
 }
 @keyframes translateBackground {
   0% {
