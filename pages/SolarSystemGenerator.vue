@@ -211,7 +211,8 @@ export default {
       // this.generated = true
     },
     randomSolar(a) {
-      this.generatd = false
+      this.generated = false
+
       let solarSys = solarsysgen.solarsysgen(a)
       solarSys.planets = solarSys.planets.sort((a,b) => a.DistanceFromStar - b.DistanceFromStar)
 
@@ -232,8 +233,7 @@ export default {
       // })
 
       this.solarSystem = solarSys
-      this.generated = true
-      this.$forceUpdate()
+      setTimeout(() => this.generated = true, 100)
     },
     zoomPlanet(planet) {
       this.selectedPlanet = planet
@@ -486,6 +486,10 @@ dl.zoomed-infos dd {
 
   i {
     font-size: 22px;
+  }
+  img {
+    width: 22px;
+    height: 22px;
   }
 }
 dl.zoomed-infos p {
