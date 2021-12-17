@@ -71,8 +71,20 @@
             <luaPlanetGenerator :zoomed="planet.name == selectedPlanet.name" :planet="planet"/>
 
             <dl class="infos" v-if="selectedPlanet.type != 'Star'" :class="{'zoomed-infos': selectedPlanet.name}">
-              <dt>{{planet.name}}</dt>
-              <dd><span>{{planet.type}}</span></dd>
+              <dt>
+                <i v-if="planet.civilization.name" class="fas fa-male"></i>
+                {{planet.name}}
+              </dt>
+              <dd>
+                <span>
+                  <i v-if="planet.type == 'Water'" class="fas fa-tint"></i>
+                  <img src="~/static/biohazard-solid.svg" v-if="planet.type == 'Toxic'">
+                  <i v-if="planet.type == 'Earth-like'" class="fas fa-globe-americas"></i>
+                  <i v-if="planet.type == 'Ice'" class="fas fa-snowflake"></i>
+                  <i v-if="planet.type == 'Gas'" class="fas fa-burn"></i>
+                  {{planet.type}}
+                </span>
+              </dd>
               <dd>
                 <p>
                   {{planet.radius}} km
@@ -364,6 +376,17 @@ dl.infos {
   padding-left: 100%;
   cursor: pointer;
   user-select: none;
+
+  i {
+    color: #fff;
+    font-size: 18px;
+    margin-right: $space-xxs;
+  }
+  img {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+  }
 }
 //line
 dl.infos:before {
@@ -385,13 +408,18 @@ dl.infos dt {
   position: absolute;
   left: 48px;
   margin-bottom: 26px;
-  bottom: 14px;
+  bottom: 18px;
   width: 200px;
   color: #FFF;
   font-size: 16px;
   text-shadow: 1px 1px 2px black;
   transition: all .4s ease;
   opacity: .7;
+
+  i {
+    font-size: 16px;
+    margin: 0 4px 0 6px;
+  }
 }
 dl.infos dd {
   position: absolute;
@@ -403,11 +431,16 @@ dl.infos dd {
   text-shadow: 1px 1px 2px black;
   transition: all .4s ease;
   opacity: .8;
+
+  span {
+    display: flex;
+    align-items: center;
+  }
 }
 dl.infos p {
   position: absolute;
   left: 0px;
-  bottom: -15px;
+  bottom: -18px;
   width: 150px;
   font-weight: 300;
   color: #FFF;
@@ -427,15 +460,20 @@ dl.zoomed-infos:before {
 dl.zoomed-infos dt {
   left: 34px;
   margin-bottom: 26px;
-  bottom: 59px;
+  bottom: 63px;
   width: 200px;
   color: #FFF;
   font-size: 20px;
   text-shadow: 12px 1px 2px black;
   transition: all .4s ease;
   opacity: .7;
+
+  i {
+    font-size: 18px;
+    margin: 0 3px 0 5px;
+  }
 }
-dl.zoomed-infos dd{
+dl.zoomed-infos dd {
   position: absolute;
   left: 34px;
   bottom: 54px;
@@ -445,11 +483,15 @@ dl.zoomed-infos dd{
   text-shadow: 1px 1px 2px black;
   transition: all .4s ease;
   opacity: .8;
+
+  i {
+    font-size: 22px;
+  }
 }
 dl.zoomed-infos p {
   position: absolute;
   left: 0px;
-  bottom: -20px;
+  bottom: -22px;
   width: 150px;
   font-weight: 300;
   color: #FFF;
@@ -472,6 +514,7 @@ dl.middle-infos, dl.bottom-info {
   bottom: -50px;
   cursor: pointer;
   user-select: none;
+  opacity: .8;
 
   display: flex;
   flex-direction: column;
