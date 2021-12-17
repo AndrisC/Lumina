@@ -12,7 +12,7 @@
     </div>
 
     <div v-if="generated" class="solar-system-container">
-      <div class="system-header">
+      <div :class="{'hidden': showPlanet(solarSystem.star), 'zoomed-system-header': !systemView}" class="system-header">
         <div v-if="systemView" class="system-info">
           <div class="sys-name-container">
             <h4 class="sys-name-title">System</h4>
@@ -24,10 +24,10 @@
           </div>
         </div>
 
-        <div v-if="solarSystem.star" :class="{'hidden': showPlanet(solarSystem.star)}" class="star-wrapper" :style="starRadius">
+        <div v-if="solarSystem.star" :class="{'zoomed-star-wrapper': !systemView}" class="star-wrapper" :style="starRadius">
           <div class="star-container">
             <div @click="zoomPlanet(solarSystem.star)" class="star">
-              <luaPlanetGenerator :planet="solarSystem.star"/>
+              <luaPlanetGenerator :zoomed="solarSystem.star.name == selectedPlanet.name" :planet="solarSystem.star"/>
             </div>
 
             <div class="star-info">
@@ -65,7 +65,7 @@
             v-for="(planet, index) in solarSystem.planets"
             :key="planet._id"
             class="planet"
-            :class="{'hidden': showPlanet(planet)}"
+            :class="{'hidden': showPlanet(planet), 'zoomed-planet': planet.name == selectedPlanet.name}"
             :style="starRadius"
           >
             <luaPlanetGenerator :zoomed="planet.name == selectedPlanet.name" :planet="planet"/>
@@ -324,8 +324,16 @@ export default {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  // align-items: center;
   padding: $space-xl 0 0 0;
+}
+.zoomed-system-header {
+  height: 100%;
+}
+.zoomed-star-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .star-wrapper {
   margin: 0 auto;
@@ -352,18 +360,22 @@ export default {
   display: flex;
 }
 .planets-wrapper {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  // justify-content: center;
   align-items: center;
   grid-gap: $space-xl;
-  padding: $space-m;
+  padding: $space-l;
   padding-top: 100px;
 }
 .planet {
   position: relative;
   z-index: 10;
   margin-right: 90px;
+}
+.zoomed-planet {
+  margin: 0 auto;
+  align-self: flex-end;
 }
 dl.infos {
   position: absolute;
@@ -542,6 +554,7 @@ dl.middle-infos, dl.bottom-info {
 .main-infos-wrapper {
   z-index: 200;
   position: sticky;
+  // top: 50%;
   right: 0;
 }
 .main-infos-container {
