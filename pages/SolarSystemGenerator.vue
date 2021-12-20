@@ -200,6 +200,11 @@ export default {
       return  {'--radius': '-' + Math.floor(this.solarSystem.star.radius / 13) + 'px'}
     }
   },
+  created() {
+    this.$API.Read('Star')
+    .then(res => console.log('success:',res))
+    .catch(err => console.error(err))
+  },
   methods: {
     showPlanet(planet) {
       if (this.selectedPlanet.name) {
