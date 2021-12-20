@@ -5,12 +5,12 @@ import civilizationgen from "./civilizationgen.js";
 
 export default {
     planetgen: function (number, star) {
-       let allPlanet = [];
+        let allPlanet = [];
 
         var planetNames = namegen.planetnamegen(number);
 
         // console.warn(planetNames);
-        for (let i = 0; i <= number-1; i++) {
+        for (let i = 0; i <= number - 1; i++) {
 
 
             //GENERATE PLACEHOLDERS
@@ -32,20 +32,14 @@ export default {
             //Generate moons max 8
             let newMoons = Math.floor(Math.random() * 8);
 
-
-
-
-
-
-
-
-            //Generate vegetation if needed
+            //Generate moon names
+            let newMoonNames = namegen.planetnamegen(newMoons);
 
 
             //Calculate the distance from the star between 1012 - 10 km. Must multiply with 1 000 000
             let newDistance = Math.floor(Math.random() * 10020) / 10 + 10;
 
-            //Generate surface water if needed
+
 
 
             //Generate gases
@@ -84,6 +78,18 @@ export default {
                 newPlanetType = "Ice";
             }
 
+            //Generate surface water if needed
+
+            if (newPlanetType == "Water") {
+                newWater = 100;
+            } else if (newPlanetType == "Earth-like") {
+                newWater = Math.floor(Math.random() * (100 - 10));
+            } else {
+                newWater = 0;
+            }
+
+            var newHydrogen = Math.floor(Math.random() * (100 - 0));
+
 
             //Generate animals if needed
 
@@ -97,10 +103,11 @@ export default {
 
 
             //Generate civilization if needed
-            var newCivilization = civilizationgen.civilizationgen();
+            var newCivilization = civilizationgen.civilizationgen(newPlanetType);
 
 
             //Calculate the lenght of a day
+
 
 
             //Calculate the length of a year
@@ -124,27 +131,28 @@ export default {
                 radius: newRadius,
                 mass: "",
                 moons: newMoons,
+                moonNames: newMoonNames,
                 type: newPlanetType,
                 animals: {
                     name: "",
                     description: "",
                 },
-                vegetation: PLACEHOLDER,
                 liveable: PLACEHOLDER,
                 distanceFromStar: newDistance,
-                surfaceWater:PLACEHOLDER,
+                surfaceWater: newWater,
                 gas: [
-                  {name: 'nitrogen', value: newNitrogen},
-                  {name: 'oxygen', value: newOxygen},
-                  {name: 'water', value: newWater},
-                  {name: 'hydrogen', value: newHydrogen},
-                  {name: 'helium', value: newHelium},
-                  {name: 'other', value: newOther}
+                    { name: 'nitrogen', value: newNitrogen },
+                    { name: 'oxygen', value: newOxygen },
+                    { name: 'water', value: newWater },
+                    { name: 'hydrogen', value: newHydrogen },
+                    { name: 'helium', value: newHelium },
+                    { name: 'other', value: newOther }
                 ],
                 civilization: {
                     name: newCivilization[0],
                     race: newCivilization[1],
                     description: newCivilization[2],
+                    kardashev_scale: newCivilization[3],
                 },
                 lengthOfDay: PLACEHOLDER,
                 lengthOfYear: PLACEHOLDER,
@@ -157,33 +165,33 @@ export default {
         return allPlanet;
     },
     stargen() {
-      //Generate seed
-      let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
-      //Generate id
-      var newId = 0;
-      //Generate star name
-      var starName = namegen.planetnamegen(1);
-      //Generate radius between 7200 - 4000 km
-      let newRadius = Math.floor(Math.random() * (7020 - 4000) + 4000);
-      //Generate surface temperature
-      let newTemperature = Math.floor(Math.random() * (36000 - 2400) + 4000);
-      //Calculate class from temp
-      var newClass = "Unknow class";
-      if (newTemperature <= 3700) {
-          newClass = "Class M";0
-      } else if (newTemperature >= 3700 && newTemperature <= 5200) {
-          newClass = "Class K"
-      } else if (newTemperature >= 5200 && newTemperature <= 6000) {
-        newClass = "Class G"
-    } else if (newTemperature >= 6000 && newTemperature <= 7500) {
-        newClass = "Class F"
-    } else if (newTemperature >= 7500 && newTemperature <= 10000) {
-        newClass = "Class A"
-    } else if (newTemperature >= 10000 && newTemperature <= 30000) {
-        newClass = "Class B"
-    } else if (newTemperature >= 30000) {
-        newClass = "Class O"
-    }
+        //Generate seed
+        let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
+        //Generate id
+        var newId = 0;
+        //Generate star name
+        var starName = namegen.planetnamegen(1);
+        //Generate radius between 7200 - 4000 km
+        let newRadius = Math.floor(Math.random() * (7020 - 4000) + 4000);
+        //Generate surface temperature
+        let newTemperature = Math.floor(Math.random() * (36000 - 2400) + 4000);
+        //Calculate class from temperature
+        var newClass = "Unknow class";
+        if (newTemperature <= 3700) {
+            newClass = "Class M"; 0
+        } else if (newTemperature >= 3700 && newTemperature <= 5200) {
+            newClass = "Class K"
+        } else if (newTemperature >= 5200 && newTemperature <= 6000) {
+            newClass = "Class G"
+        } else if (newTemperature >= 6000 && newTemperature <= 7500) {
+            newClass = "Class F"
+        } else if (newTemperature >= 7500 && newTemperature <= 10000) {
+            newClass = "Class A"
+        } else if (newTemperature >= 10000 && newTemperature <= 30000) {
+            newClass = "Class B"
+        } else if (newTemperature >= 30000) {
+            newClass = "Class O"
+        }
 
 
       var star = {

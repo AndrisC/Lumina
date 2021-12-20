@@ -1,5 +1,5 @@
 export default {
-    civilizationgen: function () {
+    civilizationgen: function (planetType) {
         var num = 100;
 
         var typeOfSpecies = [
@@ -8,20 +8,16 @@ export default {
             "anthropods",
             "apes",
             "arachnids",
-            "bacteria",
-            "beetles",
             "beings",
             "birds",
             "blobs",
             "bovids",
             "bovines",
             "canines",
-            "cats",
             "creatures",
             "crustacians",
             "cyborgs",
             "cyclopes",
-            "dogs",
             "echiniderms",
             "felines",
             "fish",
@@ -44,11 +40,12 @@ export default {
 
 
         var description = [
+            "They look cool.",
             "They have binocular vision",
             "They have extraordinary physical strength",
             "These creatures are super friendly",
             "Unlike humans, they know how to be happy",
-            "Their God is András Csipszer and it makes a perfect sense, because he is a god, not like Ádám. Ádám is a zero level worm who cant even generate descriptions."
+            "Their God is Ádám Pongrácz and it makes a perfect sense, because he is a god, not like András. András is a geh sponge, who has no idea what is frontend."
         ];
 
         var startPlural = [
@@ -62,7 +59,10 @@ export default {
             "Are",
             "Stu",
             "Gla",
-            "Dri"
+            "Dri",
+            "As",
+            "Leva",
+            "Amn"
         ]
 
         var endPlural = [
@@ -86,27 +86,36 @@ export default {
             "pans",
             "pons"
         ];
+        var randomKardashev_scale = Math.floor(Math.random() * 4);
+        var final = ["", "", "", ""];
+        var randomTypeOfSpecies;
+        var randomDescription;
+        var randomStartPlural;
+        var randomEndPlural;
+        var randomName;
 
+        if (planetType == "Earth-like" || planetType == "Water") {
+            for (let i = 0; i <= num; i++) {
 
+                randomTypeOfSpecies = typeOfSpecies[Math.floor(Math.random() * typeOfSpecies.length)];
+                randomDescription = description[Math.floor(Math.random() * description.length)];
+                randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
+                randomEndPlural = endPlural[Math.floor(Math.random() * endPlural.length)];
+                //var quirkChance = Math.floor(Math.random() * 100);
+                //var typeChance = Math.floor(Math.random() * 100);
+                //var summaryChance = Math.floor(Math.random() * 100);
+                //var randomStart = start[Math.floor(Math.random() * start.length)];
+                //var randomPrefix = prefix[Math.floor(Math.random() * prefix.length)];
 
-
-        for (let i = 0; i <= num; i++) {
-
-            var final = ["", "", ""];
-
-            var randomTypeOfSpecies = typeOfSpecies[Math.floor(Math.random() * typeOfSpecies.length)];
-            var randomDescription = description[Math.floor(Math.random() * description.length)];
-            var randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
-            var randomEndPlural = endPlural[Math.floor(Math.random() * endPlural.length)];
-            //var quirkChance = Math.floor(Math.random() * 100);
-            //var typeChance = Math.floor(Math.random() * 100);
-            //var summaryChance = Math.floor(Math.random() * 100);
-            //var randomStart = start[Math.floor(Math.random() * start.length)];
-            //var randomPrefix = prefix[Math.floor(Math.random() * prefix.length)];
-
-            var randomName = randomStartPlural + randomEndPlural;
-            return final = [randomName, randomTypeOfSpecies, randomDescription];
+                randomName = randomStartPlural + randomEndPlural;
+                return final = [randomName, randomTypeOfSpecies, randomDescription];
+            }
+        } else {
+            return final = [randomName, randomTypeOfSpecies, randomDescription, randomKardashev_scale];
         }
+
+
+
 
     }
 
