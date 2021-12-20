@@ -5,6 +5,7 @@
       <h4></h4>
       <div v-if="systemView" class="generate-container">
         <lua-button @click="randomSolar(14)">Generate star system</lua-button>
+        <lua-button @click="save()">Save system</lua-button>
       </div>
       <div v-if="!systemView" class="navigation-container">
         <lua-button @click="systemView = true, selectedPlanet = {}">Back to system</lua-button>
@@ -205,6 +206,17 @@ export default {
         return this.selectedPlanet.name != planet.name
       }
       return false
+    },
+    save() {
+      let solarsystem = {
+        name: this.solarSystem.solarSystemName,
+        numberOfPlanets: this.solarSystem.numberOfPlanets,
+        star: this.solarSystem.star,
+        planets: this.solarSystem.planets
+      }
+      this.$API.Create('Solarsystem', solarsystem)
+      .then( res => console.log('cool'))
+      .catch( err => console.log(err))
     },
     gimmeName(a) {
       return console.warn(namegen.planetnamegen(a))
