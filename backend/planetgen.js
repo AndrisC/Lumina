@@ -125,7 +125,7 @@ export default {
 
             var planetInfo = {
                 seed: newSeed,
-                _id: newId,
+                id: newId,
                 name: newName,
                 orbitedStar: star,
                 radius: newRadius,
@@ -194,17 +194,17 @@ export default {
         }
 
 
-        var star = {
-            seed: newSeed,
-            _id: newId,
-            name: starName[0],
-            radius: newRadius,
-            mass: "",
-            surfaceTemperature: newTemperature,
-            class: newClass,
-            type: "Star",
-        };
-        console.warn(star);
-        return star;
+      var star = {
+        seed: newSeed,
+        id: newId,
+        name: starName[0],
+        radius: newRadius,
+        mass: "",
+        surfaceTemperature: newTemperature,
+        class: newClass,
+        type: "Star",
+      };
+      console.warn(star);
+      return star;
     }
 }

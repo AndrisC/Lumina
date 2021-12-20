@@ -43,6 +43,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {src: '~/plugins/API', ssr: false},
+    {src: '~/plugins/axios', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -60,7 +62,10 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    // baseURL: 'http://localhost:6969'
+    baseURL: 'https://myviapan.ratior.hu:6970'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

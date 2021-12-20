@@ -137,7 +137,7 @@ export default {
 
             var planetInfo = {
                 seed: newSeed,
-                _id: newId,
+                id: newId,
                 name: newName,
                 orbitedStar: star,
                 radius: newRadius,
