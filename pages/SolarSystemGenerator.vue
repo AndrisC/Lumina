@@ -64,7 +64,7 @@
           <div
             @click="zoomPlanet(planet)"
             v-for="(planet, index) in solarSystem.planets"
-            :key="planet._id"
+            :key="planet.id"
             class="planet"
             :class="{'hidden': showPlanet(planet), 'zoomed-planet': planet.name == selectedPlanet.name}"
             :style="starRadius"
@@ -214,7 +214,8 @@ export default {
         star: this.solarSystem.star,
         planets: this.solarSystem.planets
       }
-      this.$API.Create('Solarsystem', solarsystem)
+
+      this.$API.Create('Star', this.solarSystem.star)
       .then( res => console.log('cool'))
       .catch( err => console.log(err))
     },

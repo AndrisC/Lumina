@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const autopopulate = require("mongoose-autopopulate");
 const ObjectId = mongoose.Schema.Types.ObjectId
 
-const SolarSystemSchema = new mongoose.Schema({
+const SolarsystemSchema = new mongoose.Schema({
   name: {type: String, name: 'Solarsystem name', required: true, marked: true, unique: true},
   numberOfPlanets: {type: Number, name: 'Number of planets'},
   star: {
@@ -68,5 +68,5 @@ const SolarSystemSchema = new mongoose.Schema({
 }, { selectPopulatedPaths: false });
 
 
-SolarSystemSchema.plugin(autopopulate);
-module.exports = mongoose.model('SolarSystem', SolarSystemSchema);
+SolarsystemSchema.plugin(autopopulate);
+module.exports = mongoose.model('Solarsystem', SolarsystemSchema);
