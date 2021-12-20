@@ -27,12 +27,12 @@ export default {
 
             //Generate radius between 5200 - 200 km
             let newRadius = Math.floor(Math.random() * (5200 - 200) + 200);
-            
+
 
             //Generate the amount of gas
 
 
-            
+
             //generate type
             var planetTypes = ["Ice", "Water", "Gas", "Earth-like", "Toxic"]
             let newPlanetType = planetTypes[Math.floor(Math.random() * planetTypes.length)];
@@ -40,13 +40,13 @@ export default {
 
             //Generate mass. You have to multply it by 100 000 000 000 000 000 000 (in tons)
             let newMass = newRadius  * 9.375;
-            
+
 
             //Earth's radius and mass value
             var compEarthRadius = 637;
             var compEarthMass = 6000;
 
-            
+
 
             if (newPlanetType == "Gas") {
                 newMass = newMass / 3;
@@ -61,7 +61,7 @@ export default {
             let newMoons = Math.floor(Math.random() * 8);
 
 
-           
+
 
 
             //Generate animals if needed
@@ -76,7 +76,7 @@ export default {
             //Generate surface water if needed
 
 
-            
+
 
 
             //Generate civilization if needed
@@ -102,7 +102,7 @@ export default {
 
             var planetInfo = {
                 seed: newSeed,
-                _id: newId,
+                id: newId,
                 name: newName,
                 orbitedStar: star,
                 radius: newRadius,
@@ -147,7 +147,7 @@ export default {
 
       var star = {
         seed: newSeed,
-        _id: newId,
+        id: newId,
         name: starName[0],
         radius: newRadius,
         mass: "",

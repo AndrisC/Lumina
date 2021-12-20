@@ -10,7 +10,7 @@
       </div>
 
       <div v-if="menuOpen" class="menu-dropdown">
-        <div @click="$router.push(menu.location)" v-for="menu in menus" class="one-menu" :key="menu._id">
+        <div @click="$router.push(menu.location)" v-for="menu in menus" class="one-menu" :key="menu.id">
           <p>{{menu.name}}</p>
         </div>
       </div>
