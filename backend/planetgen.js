@@ -2,12 +2,14 @@ import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen";
 import animalgen from "./animalgen.js";
 import civilizationgen from "./civilizationgen.js";
+import kardashevRewrite from "./kardashevRewrite.js";
 
 export default {
     planetgen: function (number, star) {
         let allPlanet = [];
-
+        var advancedCivilizationIDs = [];
         var planetNames = namegen.planetnamegen(number);
+        let kardashevRewriteNeed = false;
 
         // console.warn(planetNames);
         for (let i = 0; i <= number - 1; i++) {
@@ -28,6 +30,13 @@ export default {
             //Generate radius between 5200 - 200 km
             let newRadius = Math.floor(Math.random() * (3200 - 400) + 400);
 
+            //Calculate mass *10^24
+            let newMass = Math.floor(newRadius * newRadius * (1000 / newRadius) / 100) / 1000;
+
+            //Calculate gravity g = G*M/r^2
+            let newGravity = newMass / newRadius * newRadius;
+            console.warn(newGravity);
+
 
             //Generate moons max 8
             let newMoons = Math.floor(Math.random() * 8);
@@ -40,7 +49,11 @@ export default {
             let newDistance = Math.floor(Math.random() * 10020) / 10 + 10;
 
 
+            //Calculate the length of a year in days
+            //let newLengthOfAYear = newDistance / 93 * 365;
 
+            //Calculate the lenght of a day (in hours) 4 - 400
+            let newLengthOfADay = Math.floor(Math.random() * (440 - 4) + 4); 
 
             //Generate gases
 
@@ -62,6 +75,7 @@ export default {
 
             gasesSum = gasesSum = newHydrogen + newHelium + newNitrogen + newOxygen + newWater + newOther;
 
+            console.warn("Summed gas: "+gasesSum);
             //generate type
 
             let newPlanetType = "Toxic"
@@ -79,13 +93,13 @@ export default {
             }
 
             //Generate surface water if needed
-
+            var newSurfaceWater;
             if (newPlanetType == "Water") {
-                newWater = 100;
+                newSurfaceWater = 100;
             } else if (newPlanetType == "Earth-like") {
-                newWater = Math.floor(Math.random() * (100 - 10));
+                newSurfaceWater = Math.floor(Math.random() * (100 - 10));
             } else {
-                newWater = 0;
+                newSurfaceWater = 0;
             }
 
             var newHydrogen = Math.floor(Math.random() * (100 - 0));
@@ -103,20 +117,25 @@ export default {
 
 
             //Generate civilization if needed
-            var newCivilization = civilizationgen.civilizationgen(newPlanetType);
+            var newCivilization = civilizationgen.civilizationgen(newPlanetType, number);
+            
+            if (newCivilization[3] >= 2) {
+                advancedCivilizationIDs.push(newId-1);
+                kardashevRewriteNeed = true;
+            } 
+            console.warn(newName + "'s " + "kardishev scale is: "  + newCivilization[3])
+            console.warn("Advanced civilization IDs: " + advancedCivilizationIDs);
 
 
-            //Calculate the lenght of a day
-
-
-
-            //Calculate the length of a year
-
+            //Calculate length of a year
+            let newLengthOfAYear = (Math.PI * 2) * Math.sqrt(newRadius*newRadius*newRadius / newGravity);
+            console.warn("Distance from the sun: " + newDistance + "  Length of a year: " + newLengthOfADay);
 
             //Generate planetary ring
 
 
             //Liveable?
+            var newLivable = "";
 
             //Generate seed
             let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
@@ -129,7 +148,7 @@ export default {
                 name: newName,
                 orbitedStar: star,
                 radius: newRadius,
-                mass: "",
+                mass: newMass,
                 moons: newMoons,
                 moonNames: newMoonNames,
                 type: newPlanetType,
@@ -139,7 +158,7 @@ export default {
                 },
                 liveable: PLACEHOLDER,
                 distanceFromStar: newDistance,
-                surfaceWater: newWater,
+                surfaceWater: newSurfaceWater,
                 gas: [
                     { name: 'nitrogen', value: newNitrogen },
                     { name: 'oxygen', value: newOxygen },
@@ -154,14 +173,19 @@ export default {
                     description: newCivilization[2],
                     kardashev_scale: newCivilization[3],
                 },
-                lengthOfDay: PLACEHOLDER,
-                lengthOfYear: PLACEHOLDER,
+                lengthOfDay: newLengthOfADay,
+                lengthOfYear: newLengthOfAYear,
                 planetaryRing: PLACEHOLDER
             };
             console.warn(planetInfo);
             allPlanet.push(planetInfo);
 
         }
+
+        if (kardashevRewriteNeed == true) {
+            kardashevRewrite.kardashevRewriteDescriptions(allPlanet, advancedCivilizationIDs);
+        }
+
         return allPlanet;
     },
     stargen() {

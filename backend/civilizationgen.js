@@ -1,14 +1,13 @@
-export default {
-    civilizationgen: function (planetType) {
-        var num = 100;
+import solarsysgen from "../backend/solarsysgen";
 
+export default {
+    civilizationgen: function (planetType, number) {
         var typeOfSpecies = [
             "aliens",
             "amphibians",
             "anthropods",
             "apes",
             "arachnids",
-            "beings",
             "birds",
             "blobs",
             "bovids",
@@ -16,15 +15,12 @@ export default {
             "canines",
             "creatures",
             "crustacians",
-            "cyborgs",
             "cyclopes",
             "echiniderms",
             "felines",
-            "fish",
             "herbivores",
             "holograms",
             "humanoids",
-            "hypochondriacs",
             "insects",
             "mammals",
             "molluscs",
@@ -38,6 +34,27 @@ export default {
             "worms",
         ];
 
+        var typeOfSpeciesWater = [
+            "beings",
+            "blobs",
+            "fish",
+            "herbivores",
+            "molluscs",
+            "reptiles",
+            "slugs",
+            "sponges",
+            "worms",
+        ];
+
+        var typeOfSpeciesAdvanced = [
+            "cyborgs",
+            "holograms",
+            "robots",
+            "digitized brains",
+            "beings",
+            "creatures",
+
+        ]
 
         var description = [
             "They look cool.",
@@ -86,7 +103,19 @@ export default {
             "pans",
             "pons"
         ];
-        var randomKardashev_scale = Math.floor(Math.random() * 4);
+
+
+        //Generate Kardaschev scale
+        var randomKardashev_scale = Math.floor(Math.random() * 30);
+       
+        if (randomKardashev_scale <= 10) {
+            randomKardashev_scale = 1;
+        } else if (randomKardashev_scale >= 11 && randomKardashev_scale <= 28) {
+            randomKardashev_scale = 2;
+        } else {
+            randomKardashev_scale = 3;
+        }
+
         var final = ["", "", "", ""];
         var randomTypeOfSpecies;
         var randomDescription;
@@ -94,23 +123,32 @@ export default {
         var randomEndPlural;
         var randomName;
 
-        if (planetType == "Earth-like" || planetType == "Water") {
-            for (let i = 0; i <= num; i++) {
-
-                randomTypeOfSpecies = typeOfSpecies[Math.floor(Math.random() * typeOfSpecies.length)];
-                randomDescription = description[Math.floor(Math.random() * description.length)];
-                randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
-                randomEndPlural = endPlural[Math.floor(Math.random() * endPlural.length)];
-                //var quirkChance = Math.floor(Math.random() * 100);
-                //var typeChance = Math.floor(Math.random() * 100);
-                //var summaryChance = Math.floor(Math.random() * 100);
-                //var randomStart = start[Math.floor(Math.random() * start.length)];
-                //var randomPrefix = prefix[Math.floor(Math.random() * prefix.length)];
-
-                randomName = randomStartPlural + randomEndPlural;
-                return final = [randomName, randomTypeOfSpecies, randomDescription];
+        if (planetType == "Earth-like") {
+            if (randomKardashev_scale == 3) {
+                randomTypeOfSpecies = typeOfSpeciesAdvanced[Math.floor(Math.random() * typeOfSpeciesAdvanced.length)];
             }
+            randomTypeOfSpecies = typeOfSpecies[Math.floor(Math.random() * typeOfSpecies.length)];
+            randomDescription = description[Math.floor(Math.random() * description.length)];
+            randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
+            randomEndPlural = endPlural[Math.floor(Math.random() * endPlural.length)];
+
+            randomName = randomStartPlural + randomEndPlural;
+            return final = [randomName, randomTypeOfSpecies, randomDescription, randomKardashev_scale];
+            
+        } else if (planetType == "Water") {
+            if (randomKardashev_scale == 3) {
+                randomTypeOfSpecies = typeOfSpeciesAdvanced[Math.floor(Math.random() * typeOfSpeciesAdvanced.length)];
+            }
+            randomTypeOfSpecies = typeOfSpeciesWater[Math.floor(Math.random() * typeOfSpeciesWater.length)];
+            randomDescription = description[Math.floor(Math.random() * description.length)];
+            randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
+            randomEndPlural = endPlural[Math.floor(Math.random() * endPlural.length)];
+
+            randomName = randomStartPlural + randomEndPlural;
+            return final = [randomName, randomTypeOfSpecies, randomDescription, randomKardashev_scale];
+
         } else {
+            randomKardashev_scale = 0;
             return final = [randomName, randomTypeOfSpecies, randomDescription, randomKardashev_scale];
         }
 
