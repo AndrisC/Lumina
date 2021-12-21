@@ -36,8 +36,8 @@ export default {
             let newMoonNames = namegen.planetnamegen(newMoons);
 
 
-            //Calculate the distance from the star between 1012 - 10 km. Must multiply with 1 000 000
-            let newDistance = Math.floor(Math.random() * 10020) / 10 + 10;
+            //Calculate the distance from the star between 100 - 1 AU. Must multiply with 1 000 000
+            let newDistance = Math.floor(Math.random() * 1000) / 10 + 1;
 
 
 

@@ -124,11 +124,11 @@ export default {
   box-shadow:inset -10px -10px 40px #251303, inset 10px 10px 30px -10px rgba(7, 23, 70, 0.6);
 }
 .sun {
-  background:url(https://www.solarsystemscope.com/textures/download/2k_sun.jpg) repeat-x;
+  background:url('~/static/img/sun.jpg') repeat-x;
   animation: translateBackground 55s infinite linear;
 }
 .earth {
-  background:url(https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg) repeat-x;
+  background:url('~/static/img/earth.jpg') repeat-x;
   animation: translateBackground 35s infinite linear;
 }
 .background {
@@ -139,7 +139,7 @@ export default {
   border-radius:50%;
 }
 .clouds {
-  background:url(https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg) repeat-x;
+  background:url('~/static/img/cloud.jpg') repeat-x;
   width:300px;
   height:300px;
   border-radius:50%;
