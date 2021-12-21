@@ -4,12 +4,16 @@
       <!-- <button @click="gimmeName(200)">Generate Planet Names</button> -->
       <h4></h4>
       <div v-if="systemView" class="generate-container">
-        <lua-button @click="randomSolar(14)">Generate star system</lua-button>
-        <lua-button @click="save()">Save system</lua-button>
+        <lua-button @click="randomSolar(1), loading = true">Generate star system</lua-button>
+        <lua-button v-if="generated" @click="save()">Save system</lua-button>
       </div>
       <div v-if="!systemView" class="navigation-container">
         <lua-button @click="systemView = true, selectedPlanet = {}">Back to system</lua-button>
       </div>
+    </div>
+
+    <div v-if="!generated && loading" class="loading-container">
+      <lua-loader />
     </div>
 
     <div v-if="generated" class="solar-system-container">
@@ -88,7 +92,7 @@
               </dd>
               <dd>
                 <p>
-                  {{planet.radius}} km
+                  {{planet.distanceFromStar}} AU
                 </p>
               </dd>
             </dl>
@@ -117,15 +121,27 @@
             </div>
 
             <div class="one-info">
+              <p>Radius</p>
+              <hr>
+              <span>{{selectedPlanet.radius}} km</span>
+            </div>
+
+            <div class="one-info">
+              <p>Distance from star</p>
+              <hr>
+              <span>{{selectedPlanet.distanceFromStar}} AU</span>
+            </div>
+
+            <div class="one-info">
               <p>Livability</p>
               <hr>
               <span>{{selectedPlanet.liveable}}</span>
             </div>
           </div>
 
-          <div class="liveable-container main-infos-container">
+          <div v-if="selectedPlanet.animals.name || selectedPlanet.civilization.name" class="liveable-container main-infos-container">
 
-            <div class="animals-info">
+            <div v-if="selectedPlanet.animals.name" class="animals-info">
               <p class="info-title">Animals</p>
 
               <div class="one-info">
@@ -139,7 +155,7 @@
               </div>
             </div>
 
-            <div class="civilization-info">
+            <div v-if="selectedPlanet.civilization.name" class="civilization-info">
               <p class="info-title">Civilization</p>
 
               <div class="one-info">
@@ -169,6 +185,14 @@
               <span>{{Math.floor(gas.value)}}%</span>
             </div>
           </div>
+
+          <div v-if="selectedPlanet.moonNames.length" class="moon-container main-infos-container">
+            <p class="info-title">Moons</p>
+
+            <div v-for="moon in selectedPlanet.moonNames" class="one-info">
+              <span>{{moon}}</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -177,10 +201,6 @@
 </template>
 
 <script>
-import Vue from "vue";
-import VueRouter from "vue-router";
-//import HandleSolarSystemGenerator from "./handleSolarSystemGenerator.js";
-//import planetNameGenerator from "./namegen.js";
 import namegen from "../backend/namegen.js";
 import solarsysgen from "../backend/solarsysgen.js";
 import luaPlanetGenerator from '~/components/lua-planet-generator'
@@ -193,12 +213,18 @@ export default {
         selectedPlanet: {},
         solarSystem: {},
         planetShow: true,
+        loading: false
     }
   },
   computed: {
     starRadius() {
       return  {'--radius': '-' + Math.floor(this.solarSystem.star.radius / 13) + 'px'}
     }
+  },
+  created() {
+    this.$API.Read('Star')
+    .then(res => console.log('success:',res))
+    .catch(err => console.error(err))
   },
   methods: {
     showPlanet(planet) {
@@ -246,6 +272,7 @@ export default {
       // })
 
       this.solarSystem = solarSys
+      this.loading = false
       setTimeout(() => this.generated = true, 100)
     },
     zoomPlanet(planet) {
@@ -266,6 +293,12 @@ export default {
   flex-direction: column;
   height: 100%;
   padding-top: $space-s;
+}
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 200px);
 }
 .single-planet-view {
   height: 100%;
@@ -288,7 +321,8 @@ export default {
   }
 }
 .generate-container {
-  max-width: 300px;
+  display: flex;
+  grid-gap: $space-s;
 }
 .solar-system-container {
   padding: 0 $space-m;

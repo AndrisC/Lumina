@@ -64,7 +64,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'http://localhost:6969'
-    baseURL: 'https://myviapan.ratior.hu:6970'
+    baseURL: 'http://myviapan.ratior.hu:6969'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

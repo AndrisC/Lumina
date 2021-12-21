@@ -53,7 +53,7 @@ export default {
             //let newLengthOfAYear = newDistance / 93 * 365;
 
             //Calculate the lenght of a day (in hours) 4 - 400
-            let newLengthOfADay = Math.floor(Math.random() * (440 - 4) + 4); 
+            let newLengthOfADay = Math.floor(Math.random() * (440 - 4) + 4);
 
 
             //Generate gases
@@ -128,7 +128,7 @@ export default {
 
             //Liveable?
             var newLivable = "";
-            
+
 
             //Generate seed
             let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
@@ -208,7 +208,7 @@ export default {
 
         var star = {
             seed: newSeed,
-            _id: newId,
+            id: newId,
             name: starName[0],
             radius: newRadius,
             mass: "",
