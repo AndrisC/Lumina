@@ -1,66 +1,25 @@
-/*export default {
-    animalgen: function (attr, type) {
-        var animalAttrChoose =
-        {
-            '0': ["jawless ", "kitin-shell ", "tiny ", "sword-nose ", "ocean-"],
-            '1': ["cuphead "],
-            '3': ["cuphead "],
-            name,
-        };
-
-        var animalTypeChoose =
-            [
-                ["microorganisms", "There are no living things on the planet",],
-                ["fishes", "crabs", "snails"]
-            ];
-
-        let animalNames = [];
-        var numberOfGen = Math.floor(Math.random() * (animalAttrChoose[attr].length - 1) + 1);
-        console.warn(numberOfGen);
-
-        for (let i = 0; i < numberOfGen; i++) {
-            name = '';
-            var randAttrNumb = Math.floor(Math.random() * (animalAttrChoose[attr].length - 0));
-            var temp = animalAttrChoose.attr;
-            animalNames[i] = temp;
-        }
-
-
-        return animalNames;
-    }
-}
-
 export default {
-    animalgen: function (wordlType, ) {
-        var num = 100;
+    animalgen: function (worldType) {
 
-        var animalTypes = [
+        var earthAnimals = [
             "apes",
             "arachnids",
-            "bacteria",
             "beetles",
-            "beings",
             "birds",
             "blobs",
             "canines",
             "cats",
-            "creatures",
+            "fishes",
             "crustacians",
-            "cyborgs",
-            "cyclopes",
             "dinosaurs",
-            "dogs",
             "echiniderms",
             "felines",
-            "fish",
+            "fishes",
             "herbivores",
-            "holograms",
-            "humanoids",
             "hypochondriacs",
             "insects",
             "mammals",
             "molluscs",
-            "plants",
             "rattlesnakes",
             "reptiles",
             "rodents",
@@ -68,85 +27,101 @@ export default {
             "snakes",
             "sponges",
             "worms",
+            "insects",
+        ];
+        var waterAnimals = [
+            "amoebas",
+            "algaes",
+            "fishes",
+            "crabs",
+            "insects",
+            "reptiles",
+            "blobs",
+            "snakes",
+            "shells",
+            "fish lizards",
+            "polyps",
+            "jellyfishes",
+            "starfishes",
+            "sea urchins",
+            "sea cucumber",
         ];
 
         var animalAttributes = [
-            "tiny",
-            "ordinary",
-            "jawless",
-            "spineless",
-            "Their God is Adam Pongrácz and it makes a perfect sense, because he is a god, not like András. András is geh."
+            "tiny ",
+            "ordinary ",
+            "",
+            "",
+            "jawless ",
+            "spineless ",
+            "blue ",
+            "red ",
+            "green ",
+            "",
+            "white ",
+            "spotted ",
+            "",
+            "striped ",
+            "scaled ",
+            "armored ",
+            "",
+            "dotted ",
+            "horned armor "
         ];
 
-        var startPlural = [
-            "Xi",
-            "No",
-            "Bi",
-            "Yoi",
-            "Huy",
-            "Fea",
-            "Ve",
-            "Are",
-            "Stu",
-            "Gla",
-            "Dri"
-        ]
-
-        var endPlural = [
-            "guns",
-            "ons",
-            "tors",
-            "cers",
-            "eds",
-            "egs",
-            "engi",
-            "eks",
-            "zoks",
-            "gers",
-            "jers",
-            "ors",
-            "sions",
-            "uns",
-            "lorians",
-            'irans',
-            "bulans",
-            "pans",
-            "pons"
-        ];
+        let numberOfAnimals = Math.floor(Math.random() * (10 - 3) + 3)
+        var randomAnimalType;
+        let randomWaterTypeNumber;
+        let randomEarthTypeNumber;
+        var randomAnimalAttribute;
+        var finals = [];
 
 
+        if (worldType == "Water") {
 
+            randomWaterTypeNumber = Math.floor(Math.random() * waterAnimals.length);
 
-        for (let i = 0; i <= num; i++) {
+            var nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                ranNums = [],
+                k = numberOfAnimals,
+                j = 0;
 
-            var final = ["", "", ""];
-            //var quirkChance = Math.floor(Math.random() * 100);
-            var typeChance = Math.floor(Math.random() * 100);
-            //var summaryChance = Math.floor(Math.random() * 100);
-            //var randomStart = start[Math.floor(Math.random() * start.length)];
-            var randomTypeOfSpecies = typeOfSpecies[Math.floor(Math.random() * typeOfSpecies.length)];
-            var randomDescription = description[Math.floor(Math.random() * description.length)];
-            var randomStartPlural = startPlural[Math.floor(Math.random() * startPlural.length)];
-            var randomEndPlural = endPlural[Math.floor(Math.random() * endPlural.length)];
-            //var randomPrefix = prefix[Math.floor(Math.random() * prefix.length)];
+            while (k--) {
+                j = Math.floor(Math.random() * (k + 1));
+                ranNums.push(nums[j]);
+                nums.splice(j, 1);
+                console.warn("THE NUMBERS ARE : " + ranNums)
 
-            var randomName = randomStartPlural + randomEndPlural;
-            return final = [randomName, randomTypeOfSpecies, randomDescription] //start + " " + randomTypeOfSpecies + " with " + randomSkills;
+                randomAnimalAttribute = animalAttributes[Math.floor(Math.random() * animalAttributes.length)];
+                randomAnimalType = waterAnimals[ranNums.length - 1];
 
-            /*if (typeChance < 25) {
+                finals.push(randomAnimalAttribute + randomAnimalType);
+            }
 
-                final = start + " " + randomTypeOfSpecies + " with " + randomSkills;
-            } else if (typeChance <= 25 && typeChance < 50) {
+        } else if (worldType == "Earth-like") {
+            randomEarthTypeNumber = Math.floor(Math.random() * waterAnimals.length);
 
-            } else if (typeChance <= 50 && typeChance < 75) {
+            var nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+                ranNums = [],
+                k = numberOfAnimals,
+                j = 0;
 
-            } else {
+            while (k--) {
+                j = Math.floor(Math.random() * (k + 1));
+                ranNums.push(nums[j]);
+                nums.splice(j, 1);
+                console.warn("THE NUMBERS ARE : " + ranNums)
 
-            } 
+                randomAnimalAttribute = animalAttributes[Math.floor(Math.random() * animalAttributes.length)];
+                randomAnimalType = earthAnimals[ranNums.length - 1];
+
+                finals.push(randomAnimalAttribute + randomAnimalType);
+            }
+        } else {
+            finals = "Not possible to form life"
         }
-
+        console.warn("Animals: " + finals);
+        return finals;
     }
 
 }
-
-*/

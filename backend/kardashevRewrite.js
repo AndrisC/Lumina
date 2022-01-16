@@ -20,7 +20,7 @@ export default {
         ];
 
         var reasonsType111 = [
-            " have closed in quarantine, that they would then be pushed into districts, during ",
+            " have closed in quarantine and then they have been pushed into districts, during ",
             " have perished during "
         ]
 
@@ -63,6 +63,8 @@ export default {
                         var planetOccupiedDescription = "This planet has occupied by the " + allPlanet[advancedCivilizationIDs[0]].civilization.name + " from the " + allPlanet[advancedCivilizationIDs[0]].name + " planet, " + reasonType0C;
                         var planetOccupiedForDescription = " " + allPlanet[i].name + " never developed a meaningful way of life."
                         allPlanet[i].civilization.description = planetOccupiedDescription + planetOccupiedForDescription;
+                        allPlanet[i].civilization.name = allPlanet[advancedCivilizationIDs[0]].civilization.name + " (🚀)";
+                        allPlanet[i].civilization.race = allPlanet[advancedCivilizationIDs[0]].civilization.race;
                     }
                 }
             }

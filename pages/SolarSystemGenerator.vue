@@ -4,7 +4,7 @@
       <!-- <button @click="gimmeName(200)">Generate Planet Names</button> -->
       <h4></h4>
       <div v-if="systemView" class="generate-container">
-        <lua-button @click="randomSolar(1), loading = true">Generate star system</lua-button>
+        <lua-button @click="randomSolar(14), loading = true">Generate star system</lua-button>
         <lua-button v-if="generated" @click="save()">Save system</lua-button>
       </div>
       <div v-if="!systemView" class="navigation-container">

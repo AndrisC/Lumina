@@ -53,7 +53,7 @@ export default {
             //let newLengthOfAYear = newDistance / 93 * 365;
 
             //Calculate the lenght of a day (in hours) 4 - 400
-            let newLengthOfADay = Math.floor(Math.random() * (440 - 4) + 4); 
+            let newLengthOfADay = Math.floor(Math.random() * (440 - 4) + 4);
 
             //Generate gases
 
@@ -75,21 +75,21 @@ export default {
 
             gasesSum = gasesSum = newHydrogen + newHelium + newNitrogen + newOxygen + newWater + newOther;
 
-            console.warn("Summed gas: "+gasesSum);
+            console.warn("Summed gas: " + gasesSum);
             //generate type
 
             let newPlanetType = "Toxic"
 
 
-            if (newDistance >= 60 && newDistance <= 200) {
+            if (newDistance >= 60 && newDistance <= 80) {
                 newPlanetType = "Water";
                 if (newNitrogen >= 25 && newOxygen >= 6) {
                     newPlanetType = "Earth-like";
                 }
+            } else if (newDistance >= 80 && newWater >= 12) {
+                newPlanetType = "Ice";
             } else if (newHydrogen >= 25) {
                 newPlanetType = "Gas";
-            } else if (newDistance >= 180 && newWater >= 25) {
-                newPlanetType = "Ice";
             }
 
             //Generate surface water if needed
@@ -109,7 +109,7 @@ export default {
 
             //Ice-type animals
 
-            //var animalNames = animalgen.animalgen(0, 1);
+            var newAnimals = animalgen.animalgen(newPlanetType);
             //console.warn(animalNames);
 
 
@@ -118,24 +118,29 @@ export default {
 
             //Generate civilization if needed
             var newCivilization = civilizationgen.civilizationgen(newPlanetType, number);
-            
+
             if (newCivilization[3] >= 2) {
-                advancedCivilizationIDs.push(newId-1);
+                advancedCivilizationIDs.push(newId - 1);
                 kardashevRewriteNeed = true;
-            } 
-            console.warn(newName + "'s " + "kardishev scale is: "  + newCivilization[3])
+            }
+            console.warn(newName + "'s " + "kardishev scale is: " + newCivilization[3])
             console.warn("Advanced civilization IDs: " + advancedCivilizationIDs);
 
 
             //Calculate length of a year
-            let newLengthOfAYear = (Math.PI * 2) * Math.sqrt(newRadius*newRadius*newRadius / newGravity);
+            let newLengthOfAYear = (Math.PI * 2) * Math.sqrt(newRadius * newRadius * newRadius / newGravity);
             console.warn("Distance from the sun: " + newDistance + "  Length of a year: " + newLengthOfADay);
-
-            //Generate planetary ring
 
 
             //Liveable?
             var newLivable = "";
+            if (newCivilization[3] > 0) {
+                newLivable = "Livable";
+            } else if (newCivilization[3] = 0 && advancedCivilizationIDs[0] != null) {
+                newLivable = "Livable due " + advancedCivilizationIDs[0] + "'s terraformation";
+            } else {
+                newLivable = "Inanimate";
+            }
 
             //Generate seed
             let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
@@ -153,10 +158,9 @@ export default {
                 moonNames: newMoonNames,
                 type: newPlanetType,
                 animals: {
-                    name: "",
-                    description: "",
+                    name: newAnimals,
                 },
-                liveable: PLACEHOLDER,
+                liveable: newLivable,
                 distanceFromStar: newDistance,
                 surfaceWater: newSurfaceWater,
                 gas: [
@@ -175,7 +179,6 @@ export default {
                 },
                 lengthOfDay: newLengthOfADay,
                 lengthOfYear: newLengthOfAYear,
-                planetaryRing: PLACEHOLDER
             };
             console.warn(planetInfo);
             allPlanet.push(planetInfo);
@@ -186,9 +189,15 @@ export default {
             kardashevRewrite.kardashevRewriteDescriptions(allPlanet, advancedCivilizationIDs);
         }
 
+        if (advancedCivilizationIDs[0] != null) {
+            this.stargen(1, allPlanet, advancedCivilizationIDs);
+        } else {
+            this.stargen(0);
+        }
+
         return allPlanet;
     },
-    stargen() {
+    stargen(advancedCivilizationDescription, allPlanet, advancedCivilizationIDs) {
         //Generate seed
         let newSeed = Math.floor(Math.random() * (999999 - 1) + 1)
         //Generate id
@@ -217,18 +226,23 @@ export default {
             newClass = "Class O"
         }
 
+        if (advancedCivilizationDescription == 1) {
+            var newDescription = "Among the planets listed, the Kardashev scale of planet " + allPlanet[advancedCivilizationIDs[0]].name + " has a value of " + allPlanet[advancedCivilizationIDs[0]].civilization.kardashev_scale + ". This is why the entire solar system has been conquered.";
+        }
 
-      var star = {
-        seed: newSeed,
-        id: newId,
-        name: starName[0],
-        radius: newRadius,
-        mass: "",
-        surfaceTemperature: newTemperature,
-        class: newClass,
-        type: "Star",
-      };
-      console.warn(star);
-      return star;
+
+        var star = {
+            seed: newSeed,
+            id: newId,
+            name: starName[0],
+            radius: newRadius,
+            surfaceTemperature: newTemperature,
+            class: newClass,
+            type: "Star",
+            description: newDescription,
+        };
+        console.warn("The starsystem has description! :  " + star.description);
+        console.warn(star);
+        return star;
     }
 }

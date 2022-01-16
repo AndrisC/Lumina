@@ -57,12 +57,12 @@ export default {
         ]
 
         var description = [
-            "They look cool.",
+            "They look cool",
             "They have binocular vision",
             "They have extraordinary physical strength",
             "These creatures are super friendly",
             "Unlike humans, they know how to be happy",
-            "Their God is Ádám Pongrácz and it makes a perfect sense, because he is a god, not like András. András is a geh sponge, who has no idea what is frontend."
+            "They have a good sense of humor"
         ];
 
         var startPlural = [
@@ -108,9 +108,9 @@ export default {
         //Generate Kardaschev scale
         var randomKardashev_scale = Math.floor(Math.random() * 30);
        
-        if (randomKardashev_scale <= 10) {
+        if (randomKardashev_scale <= 16) {
             randomKardashev_scale = 1;
-        } else if (randomKardashev_scale >= 11 && randomKardashev_scale <= 28) {
+        } else if (randomKardashev_scale >= 17 && randomKardashev_scale <= 28) {
             randomKardashev_scale = 2;
         } else {
             randomKardashev_scale = 3;
